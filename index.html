@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KB Switches & Home Automation</title>
+    <style>
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      a {
+        text-decoration: none;
+        color: #0066cc;
+      }
+
+      /* Container */
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+      /* Hide mobile menu on desktop */
+      .mobile-nav {
+        display: none;
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo img {
+        height: 40px;
+      }
+
+      /* Navigation */
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      nav a {
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: #0066cc;
+      }
+
+      .cta-button {
+        background-color: #0066cc;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
+
+      .cta-button:hover {
+        background-color: #0052a3;
+        color: white;
+      }
+
+      /* Mobile Nav Toggle */
+      .mobile-nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 80vh;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("https://images.unsplash.com/photo-1558002038-1055e2cf6dcd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      .hero p {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .secondary-button {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .secondary-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Services Section */
+      .section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+        font-size: 36px;
+        font-weight: 700;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+      }
+
+      .service-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .service-icon {
+        font-size: 40px;
+        margin-bottom: 20px;
+        color: #0066cc;
+      }
+
+      .service-title {
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+
+      /* Featured Project */
+      .featured-project {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+      }
+
+      .before-after {
+        position: relative;
+        height: 400px;
+        margin-bottom: 30px;
+        overflow: hidden;
+      }
+
+      .before,
+      .after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .before {
+        background-image: url("https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        z-index: 1;
+      }
+
+      .after {
+        background-image: url("https://images.unsplash.com/photo-1585128788733-e0d04efb3a54?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+        z-index: 2;
+      }
+
+      .slider {
+        position: absolute;
+        width: 5px;
+        height: 100%;
+        background: white;
+        left: 50%;
+        z-index: 3;
+        cursor: ew-resize;
+      }
+
+      .slider::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background: white;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .project-description {
+        text-align: center;
+      }
+
+      /* Why Choose Us */
+      .benefits {
+        background-color: #f0f8ff;
+        border-radius: 10px;
+        padding: 40px;
+        margin-bottom: 40px;
+      }
+
+      .benefits-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .benefit-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .benefit-icon {
+        font-size: 36px;
+        color: #0066cc;
+        margin-bottom: 15px;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        position: relative;
+        padding: 40px 0;
+      }
+
+      .testimonial-container {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .testimonial-track {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+
+      .testimonial {
+        min-width: 100%;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .testimonial-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .testimonial-author {
+        font-weight: 600;
+      }
+
+      .testimonial-nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px;
+      }
+
+      .testimonial-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: #ccc;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .testimonial-dot.active {
+        background-color: #0066cc;
+      }
+
+      /* CTA Banner */
+      .cta-banner {
+        background-color: #0066cc;
+        color: white;
+        padding: 60px 0;
+        text-align: center;
+      }
+
+      .cta-banner h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #333;
+        color: white;
+        padding: 60px 0 30px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #f9f9f9;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column a {
+        color: #ccc;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column a:hover {
+        color: white;
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #ccc;
+        font-size: 14px;
+      }
+
+      /* WhatsApp Button */
+      .whatsapp-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background-color: #25d366;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        transition: transform 0.3s ease;
+      }
+
+      .whatsapp-button:hover {
+        transform: scale(1.1);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .services-grid,
+        .benefits-list {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-content {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mobile-nav {
+          display: block;
+          position: fixed;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background-color: white;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          z-index: 999;
+          transform: translateY(-100%);
+          opacity: 0;
+          transition: all 0.3s ease;
+        }
+        .mobile-nav.active {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        .mobile-nav-toggle {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- WhatsApp Button -->
+    <a
+      href="https://wa.me/919687637511?text=I'm%20interested%20in%20your%20smart%20home%20services"
+      class="whatsapp-button"
+      target="_blank"
+      aria-label="Chat on WhatsApp"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path
+          d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"
+        />
+      </svg>
+    </a>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="header-inner">
+          <div class="logo"><span>KB</span> Switches & Home Automation</div>
+          <nav>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+          </nav>
+          <a
+            href="https://wa.me/919687637511?text=I'd%20like%20to%20request%20a%20consultation"
+            class="cta-button"
+            target="_blank"
+            >Request Consultation</a
+          >
+          <button class="mobile-nav-toggle">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li>
+          <a
+            href="https://wa.me/919687637511?text=I'd%20like%20to%20request%20a%20consultation"
+            target="_blank"
+            >Request Consultation</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Smart Switching & Automation for Home & Business</h1>
+          <p>
+            Transform your space with cutting-edge automation solutions tailored
+            to your lifestyle
+          </p>
+          <div class="hero-buttons">
+            <a
+              href="https://wa.me/919687637511?text=I'd%20like%20to%20request%20a%20consultation"
+              class="cta-button"
+              target="_blank"
+              >Request a Free Consultation</a
+            >
+            <a href="#products" class="secondary-button">Explore Products</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">⚡</div>
+            <h3 class="service-title">Switches & Sensors</h3>
+            <p>Smart switches and motion sensors for automated control</p>
+            <a href="#services">Learn More</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🔒</div>
+            <h3 class="service-title">Door Locks</h3>
+            <p>Secure, keyless entry systems for your property</p>
+            <a href="#services">Learn More</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">💡</div>
+            <h3 class="service-title">Lighting Control</h3>
+            <p>Advanced lighting solutions for ambiance and efficiency</p>
+            <a href="#services">Learn More</a>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🏠</div>
+            <h3 class="service-title">Custom Automation</h3>
+            <p>Tailored smart home systems for your unique needs</p>
+            <a href="#services">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Project -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Featured Project</h2>
+        <div class="featured-project">
+          <div class="before-after">
+            <div class="before"></div>
+            <div class="after"></div>
+            <div class="slider"></div>
+          </div>
+          <div class="project-description">
+            <h3>Luxury Bungalow Transformation</h3>
+            <p>
+              Complete smart home integration with automated lighting, security,
+              and entertainment systems
+            </p>
+            <a href="#projects">View All Projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="benefits">
+          <div class="benefits-list">
+            <div class="benefit-item">
+              <div class="benefit-icon">🛠️</div>
+              <h3>Custom Installations</h3>
+              <p>Tailored solutions for your specific needs</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">📱</div>
+              <h3>Mobile Control</h3>
+              <p>Control your home from anywhere</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🔧</div>
+              <h3>24×7 Support</h3>
+              <p>Technical assistance whenever you need it</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">👥</div>
+              <h3>Trusted by 50+ Clients</h3>
+              <p>Proven track record of excellence</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section testimonials">
+      <div class="container">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonial-container">
+          <div class="testimonial-track">
+            <div class="testimonial">
+              <div class="testimonial-content">
+                <p class="testimonial-text">
+                  "KB Switches transformed our home with their innovative
+                  automation solutions. The lighting control system has been a
+                  game-changer for us."
+                </p>
+                <p class="testimonial-author">
+                  - Rajesh Patel, Residential Client
+                </p>
+              </div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-content">
+                <p class="testimonial-text">
+                  "The team's expertise in commercial automation helped us
+                  reduce energy costs by 30%. Highly recommended for business
+                  owners."
+                </p>
+                <p class="testimonial-author">- Priya Shah, Business Owner</p>
+              </div>
+            </div>
+            <div class="testimonial">
+              <div class="testimonial-content">
+                <p class="testimonial-text">
+                  "From consultation to installation, the entire process was
+                  seamless. Their after-sales support is exceptional."
+                </p>
+                <p class="testimonial-author">- Amit Desai, Villa Owner</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-nav">
+          <div class="testimonial-dot active" data-index="0"></div>
+          <div class="testimonial-dot" data-index="1"></div>
+          <div class="testimonial-dot" data-index="2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+      <div class="container">
+        <h2>Ready to automate your space?</h2>
+        <a
+          href="https://wa.me/919687637511?text=I'd%20like%20to%20request%20a%20consultation"
+          class="cta-button"
+          target="_blank"
+          >Request a Consultation</a
+        >
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>KB Switches & Home Automation</h3>
+            <p>Smart solutions for modern living and business spaces.</p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#projects">Projects</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Contact Us</h3>
+            <ul>
+              <li>Email: kblights29@gmail.com</li>
+              <li>Phone: 9687637511</li>
+              <li>Customer Care: 7990414919</li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Follow Us</h3>
+            <ul>
+              <li>
+                <a href="https://instagram.com/kb.switches" target="_blank"
+                  >Instagram</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 KB Switches & Home Automation. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Navigation Toggle
+      const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
+      const mobileNav = document.querySelector(".mobile-nav");
+
+      mobileNavToggle.addEventListener("click", function () {
+        mobileNav.classList.toggle("active");
+      });
+
+      // Before-After Slider
+      const slider = document.querySelector(".slider");
+      const beforeAfter = document.querySelector(".before-after");
+      const after = document.querySelector(".after");
+
+      let isDown = false;
+
+      slider.addEventListener("mousedown", () => {
+        isDown = true;
+      });
+
+      window.addEventListener("mouseup", () => {
+        isDown = false;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        const rect = beforeAfter.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const percent = (x / rect.width) * 100;
+
+        if (percent > 0 && percent < 100) {
+          slider.style.left = `${percent}%`;
+          after.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0% 100%)`;
+        }
+      });
+
+      // For touch devices
+      slider.addEventListener("touchstart", () => {
+        isDown = true;
+      });
+
+      window.addEventListener("touchend", () => {
+        isDown = false;
+      });
+
+      window.addEventListener("touchmove", (e) => {
+        if (!isDown) return;
+        const rect = beforeAfter.getBoundingClientRect();
+        const x = e.touches[0].clientX - rect.left;
+        const percent = (x / rect.width) * 100;
+
+        if (percent > 0 && percent < 100) {
+          slider.style.left = `${percent}%`;
+          after.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0% 100%)`;
+        }
+      });
+
+      // Testimonial Slider
+      const testimonialTrack = document.querySelector(".testimonial-track");
+      const testimonials = document.querySelectorAll(".testimonial");
+      const dots = document.querySelectorAll(".testimonial-dot");
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const index = dot.dataset.index;
+
+          // Update active dot
+          dots.forEach((d) => d.classList.remove("active"));
+          dot.classList.add("active");
+
+          // Move track
+          testimonialTrack.style.transform = `translateX(-${index * 100}%)`;
+        });
+      });
+
+      // Auto rotate testimonials
+      let currentTestimonial = 0;
+
+      function rotateTestimonials() {
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+
+        // Update active dot
+        dots.forEach((d) => d.classList.remove("active"));
+        dots[currentTestimonial].classList.add("active");
+
+        // Move track
+        testimonialTrack.style.transform = `translateX(-${
+          currentTestimonial * 100
+        }%)`;
+      }
+
+      // Rotate every 5 seconds
+      setInterval(rotateTestimonials, 5000);
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          if (this.getAttribute("href") === "#") return;
+
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            // Close mobile menu if open
+            mobileNav.classList.remove("active");
+
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Add fadeIn animations on scroll
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Apply to section titles and cards
+      document
+        .querySelectorAll(
+          ".section-title, .service-card, .featured-project, .benefit-item"
+        )
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+          observer.observe(el);
+        });
+    </script>
+  </body>
+</html>
