@@ -3,33 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KB Switches & Home Automation</title>
+    <title>KB Switches - Smart Home Automation Solutions</title>
+    <!-- Font Awesome CDN (for icons) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-      /* Reset and Base Styles */
+      /* ---------- GLOBAL STYLES ---------- */
+      :root {
+        --primary: #0066cc;
+        --primary-dark: #004c99;
+        --secondary: #ff9900;
+        --light: #f5f5f5;
+        --dark: #333333;
+        --gray: #777777;
+        --white: #ffffff;
+        --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
       * {
+        max-width: 100%;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
 
-      body {
-        line-height: 1.6;
-        color: #333;
-        background-color: #f9f9f9;
+      html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        width: 100%;
       }
 
-      img {
-        max-width: 100%;
-        height: auto;
+      body {
+        line-height: 1.6;
+        overflow-x: hidden;
+        width: 100%;
+        color: var(--dark);
+        background-color: var(--light);
       }
 
       a {
         text-decoration: none;
-        color: #0066cc;
+        color: var(--primary);
+        transition: color 0.3s ease;
       }
 
-      /* Container */
+      a:hover {
+        color: var(--primary-dark);
+      }
+
       .container {
         width: 100%;
         max-width: 1200px;
@@ -37,867 +61,1670 @@
         padding: 0 20px;
       }
 
-      /* Header */
-      header {
-        background-color: #fff;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-      }
-
-      .header-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 0;
-      }
-      /* Hide mobile menu on desktop */
-      .mobile-nav {
-        display: none;
-      }
-      .logo {
-        font-size: 24px;
-        font-weight: 700;
-        color: #333;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .logo img {
-        height: 40px;
-      }
-
-      /* Navigation */
-      nav ul {
-        display: flex;
-        list-style: none;
-        gap: 30px;
-      }
-
-      nav a {
-        color: #333;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-
-      nav a:hover {
-        color: #0066cc;
-      }
-
-      .cta-button {
-        background-color: #0066cc;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-weight: 600;
-        transition: background-color 0.3s ease;
-      }
-
-      .cta-button:hover {
-        background-color: #0052a3;
-        color: white;
-      }
-
-      /* Mobile Nav Toggle */
-      .mobile-nav-toggle {
-        display: none;
-        background: none;
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: var(--primary);
+        color: var(--white);
         border: none;
-        font-size: 24px;
+        border-radius: 4px;
         cursor: pointer;
-      }
-
-      /* Hero Section */
-      .hero {
-        height: 80vh;
-        background-image: linear-gradient(
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.5)
-          ),
-          url("https://images.unsplash.com/photo-1558002038-1055e2cf6dcd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
-        background-size: cover;
-        background-position: center;
-        color: white;
-        display: flex;
-        align-items: center;
-        text-align: center;
-      }
-
-      .hero-content {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      .hero h1 {
-        font-size: 48px;
-        margin-bottom: 20px;
-        font-weight: 700;
-      }
-
-      .hero p {
-        font-size: 20px;
-        margin-bottom: 30px;
-      }
-
-      .hero-buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-      }
-
-      .secondary-button {
-        background-color: transparent;
-        border: 2px solid white;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-weight: 600;
         transition: all 0.3s ease;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
 
-      .secondary-button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+      .btn:hover {
+        background-color: var(--primary-dark);
+        color: var(--white);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
       }
 
-      /* Services Section */
-      .section {
+      .btn-secondary {
+        background-color: var(--secondary);
+      }
+
+      .btn-secondary:hover {
+        background-color: #e68a00;
+      }
+
+      section {
         padding: 80px 0;
       }
 
       .section-title {
         text-align: center;
         margin-bottom: 50px;
+      }
+
+      .section-title h2 {
         font-size: 36px;
-        font-weight: 700;
-      }
-
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 30px;
-      }
-
-      .service-card {
-        background-color: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        text-align: center;
-        padding: 30px 20px;
-      }
-
-      .service-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-      }
-
-      .service-icon {
-        font-size: 40px;
-        margin-bottom: 20px;
-        color: #0066cc;
-      }
-
-      .service-title {
         margin-bottom: 15px;
-        font-size: 20px;
-      }
-
-      /* Featured Project */
-      .featured-project {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        margin-bottom: 40px;
-      }
-
-      .before-after {
+        color: var(--primary);
         position: relative;
-        height: 400px;
-        margin-bottom: 30px;
-        overflow: hidden;
+        display: inline-block;
       }
 
-      .before,
-      .after {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-size: cover;
-        background-position: center;
-      }
-
-      .before {
-        background-image: url("https://images.unsplash.com/photo-1519710164239-da123dc03ef4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
-        z-index: 1;
-      }
-
-      .after {
-        background-image: url("https://images.unsplash.com/photo-1585128788733-e0d04efb3a54?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
-        clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
-        z-index: 2;
-      }
-
-      .slider {
-        position: absolute;
-        width: 5px;
-        height: 100%;
-        background: white;
-        left: 50%;
-        z-index: 3;
-        cursor: ew-resize;
-      }
-
-      .slider::after {
+      .section-title h2::after {
         content: "";
         position: absolute;
-        width: 30px;
-        height: 30px;
-        background: white;
-        border-radius: 50%;
-        top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        bottom: -10px;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 3px;
+        background-color: var(--secondary);
       }
 
-      .project-description {
-        text-align: center;
-      }
-
-      /* Why Choose Us */
-      .benefits {
-        background-color: #f0f8ff;
-        border-radius: 10px;
-        padding: 40px;
-        margin-bottom: 40px;
-      }
-
-      .benefits-list {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-      }
-
-      .benefit-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .benefit-icon {
-        font-size: 36px;
-        color: #0066cc;
-        margin-bottom: 15px;
-      }
-
-      /* Testimonials */
-      .testimonials {
-        position: relative;
-        padding: 40px 0;
-      }
-
-      .testimonial-container {
-        overflow: hidden;
-        position: relative;
-      }
-
-      .testimonial-track {
-        display: flex;
-        transition: transform 0.5s ease;
-      }
-
-      .testimonial {
-        min-width: 100%;
-        padding: 20px;
-        text-align: center;
-      }
-
-      .testimonial-content {
-        background-color: white;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        max-width: 800px;
+      .section-title p {
+        color: var(--gray);
+        font-size: 18px;
+        max-width: 700px;
         margin: 0 auto;
       }
 
-      .testimonial-text {
-        font-style: italic;
-        font-size: 18px;
-        margin-bottom: 20px;
+      /* ---------- HEADER STYLES ---------- */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        box-shadow: var(--box-shadow);
+        z-index: 1000;
+        transition: padding 0.3s ease, box-shadow 0.3s ease; /* Added padding transition */
       }
 
-      .testimonial-author {
-        font-weight: 600;
-      }
-
-      .testimonial-nav {
+      .header-container {
         display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0; /* Initial padding */
+        transition: padding 0.3s ease; /* Ensure this transitions smoothly if JS changes it */
       }
 
-      .testimonial-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background-color: #ccc;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+      .logo {
+        display: flex;
+        align-items: center;
       }
 
-      .testimonial-dot.active {
-        background-color: #0066cc;
+      .logo img {
+        height: 40px;
+        margin-right: 10px;
       }
 
-      /* CTA Banner */
-      .cta-banner {
-        background-color: #0066cc;
-        color: white;
-        padding: 60px 0;
-        text-align: center;
+      .logo h1 {
+        font-size: 24px;
+        color: var(--primary);
+        font-weight: 700;
       }
 
-      .cta-banner h2 {
-        font-size: 36px;
-        margin-bottom: 20px;
+      .logo span {
+        color: var(--secondary);
       }
 
-      /* Footer */
-      footer {
-        background-color: #333;
-        color: white;
-        padding: 60px 0 30px;
-      }
-
-      .footer-content {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 40px;
-        margin-bottom: 40px;
-      }
-
-      .footer-column h3 {
-        font-size: 20px;
-        margin-bottom: 20px;
-        color: #f9f9f9;
-      }
-
-      .footer-column ul {
+      nav ul {
+        display: flex;
         list-style: none;
       }
 
-      .footer-column ul li {
-        margin-bottom: 10px;
+      nav ul li {
+        margin-left: 30px;
       }
 
-      .footer-column a {
-        color: #ccc;
+      nav ul li a {
+        color: var(--dark);
+        font-weight: 600;
+        font-size: 16px;
         transition: color 0.3s ease;
       }
 
-      .footer-column a:hover {
-        color: white;
+      nav ul li a:hover,
+      nav ul li a.active {
+        color: var(--primary);
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        z-index: 1001; /* Ensure hamburger is above nav during transition */
+      }
+
+      .hamburger div {
+        width: 25px;
+        height: 3px;
+        background-color: var(--dark);
+        margin: 5px 0;
+        transition: all 0.3s ease;
+      }
+
+      /* Hamburger active state for 'X' icon */
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      /* ---------- HERO SECTION ---------- */
+      #hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),
+          url("./images/hero.jpeg"); /* Placeholder */
+        background-size: cover;
+        background-position: center center;
+        background-attachment: scroll; /* Better for mobile */
+        min-height: 100vh; /* Use min-height for flexibility */
+        padding: 80px 0; /* Adjust based on header height */
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Added for centering hero content */
+        color: var(--white);
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto; /* This is fine for text-align center on parent */
+      }
+
+      .hero-content h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      .hero-content p {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+
+      .hero-btns {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      /* ---------- ABOUT SECTION ---------- */
+      #about {
+        background-color: var(--white);
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+      }
+
+      .about-img {
+        flex: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+      }
+
+      .about-img img {
+        width: 100%;
+        height: auto;
+        display: block; /* Removes bottom space under image */
+        transition: transform 0.5s ease;
+      }
+
+      .about-img:hover img {
+        transform: scale(1.05);
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-text h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: var(--primary);
+      }
+
+      .about-text p {
+        margin-bottom: 15px;
+        color: var(--gray);
+      }
+
+      .about-features {
+        margin-top: 30px;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .feature-icon {
+        color: var(--secondary);
+        font-size: 20px;
+        margin-right: 10px;
+        width: 24px; /* Give icon a fixed width for alignment */
+        text-align: center;
+      }
+
+      /* ---------- PRODUCTS SECTION ---------- */
+      #products {
+        background-color: var(--light);
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .product-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        transition: transform 0.3s ease, opacity 0.5s ease; /* Combined transitions from JS */
+        /* Initial state for JS animation - can be set here or in JS */
+        /* opacity: 0; */
+        /* transform: translateY(50px); */
+      }
+
+      .product-card:hover {
+        transform: translateY(
+          -10px
+        ); /* This will override the JS reveal if not careful */
+      }
+
+      .product-img {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .product-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .product-card:hover .product-img img {
+        transform: scale(1.1);
+      }
+
+      .product-info {
+        padding: 20px;
+      }
+
+      .product-info h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: var(--primary);
+      }
+
+      .product-info p {
+        color: var(--gray);
+        margin-bottom: 15px;
+        font-size: 15px; /* Slightly smaller for card description */
+      }
+
+      .product-info .btn {
+        padding: 8px 20px;
+        font-size: 14px;
+      }
+
+      /* ---------- FEATURES SECTION ---------- */
+      #features {
+        background-color: var(--white);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .feature-box {
+        text-align: center;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: var(--light);
+        box-shadow: var(--box-shadow);
+        transition: transform 0.3s ease;
+      }
+
+      .feature-box:hover {
+        transform: translateY(-10px);
+      }
+
+      .feature-box i {
+        /* Font Awesome class will be on i */
+        font-size: 50px;
+        color: var(--primary);
+        margin-bottom: 20px;
+      }
+
+      .feature-box h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        color: var(--dark);
+      }
+
+      .feature-box p {
+        color: var(--gray);
+      }
+
+      /* ---------- COMPARISON SECTION ---------- */
+      #comparison {
+        background-color: var(--light);
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--white);
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        overflow: hidden; /* Important for border-radius on table */
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+      }
+      .comparison-table td:first-child {
+        text-align: left; /* Align feature names to the left */
+      }
+
+      .comparison-table th {
+        background-color: var(--primary);
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .comparison-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .comparison-table tr:hover {
+        background-color: #f0f0f0; /* Slightly darker hover */
+      }
+
+      .check {
+        color: green;
+        font-size: 20px;
+      }
+
+      .cross {
+        color: red;
+        font-size: 20px;
+      }
+
+      /* ---------- TESTIMONIALS SECTION ---------- */
+      #testimonials {
+        background-color: var(--light); /* Base color */
+        position: relative;
+        overflow: hidden; /* To contain the ::before element */
+      }
+
+      #testimonials::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(
+          var(--gray) 0.5px,
+          transparent 0.5px
+        ); /* subtle dots */
+        background-size: 15px 15px; /* smaller dots */
+        opacity: 0.2; /* more subtle */
+        z-index: 0;
+      }
+
+      .testimonial-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+        position: relative;
+        z-index: 1; /* Ensure content is above pseudo-element */
+      }
+
+      .testimonial-video {
+        flex: 1;
+        min-width: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--box-shadow);
+        background-color: var(--dark); /* Dark bg for video */
+        padding: 0; /* Remove padding if iframe fills it */
+      }
+
+      .testimonial-video iframe {
+        width: 100%;
+        height: 315px;
+        border: none; /* Remove iframe border */
+        display: block; /* Remove potential bottom space */
+      }
+
+      .testimonial-text {
+        flex: 1.5;
+        min-width: 300px;
+        background-color: var(--white);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .testimonial-text h3 {
+        font-size: 26px;
+        margin-bottom: 5px;
+        color: var(--primary);
+      }
+
+      .testimonial-text .role {
+        font-style: italic;
+        color: var(--gray);
+        margin-bottom: 20px;
+        font-size: 15px;
+      }
+
+      .testimonial-quotes p {
+        margin-bottom: 15px;
+        color: var(--dark);
+        line-height: 1.7;
+      }
+
+      .highlight-quote {
+        position: relative;
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--primary);
+        margin: 30px 0 15px;
+        padding: 20px 25px;
+        border-left: 4px solid var(--secondary);
+        background-color: rgba(0, 102, 204, 0.05);
+        border-radius: 0 5px 5px 0;
+      }
+
+      .highlight-quote::before {
+        content: '"';
+        position: absolute;
+        top: 0;
+        left: 10px;
+        font-size: 50px;
+        color: rgba(0, 102, 204, 0.2);
+        line-height: 1;
+      }
+
+      /* ---------- CONTACT SECTION ---------- */
+      #contact {
+        background-color: var(--white);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .contact-info {
+        background-color: var(--light);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .contact-info h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--primary);
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: flex-start; /* Align icon to top of text if text wraps */
+        margin-bottom: 20px;
+      }
+
+      .contact-icon {
+        min-width: 40px; /* Ensure icon width is consistent */
+        height: 40px;
+        background-color: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        margin-right: 15px;
+        font-size: 18px; /* Icon size */
+      }
+
+      .contact-text h4 {
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: var(--dark); /* Darker for better contrast */
+      }
+
+      .contact-text p {
+        color: var(--gray);
+        font-size: 15px;
+      }
+      .contact-text p a {
+        /* Style links in contact info */
+        color: var(--primary);
+      }
+      .contact-text p a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .contact-form {
+        background-color: var(--light);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .contact-form h3 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: var(--primary);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.25); /* Focus ring */
+      }
+
+      textarea.form-control {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      /* ---------- FOOTER ---------- */
+      footer {
+        background-color: var(--dark);
+        color: var(--white);
+        padding: 60px 0 0;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .footer-widget h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: var(--secondary);
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-widget h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 2px;
+        background-color: var(--secondary);
+      }
+
+      .footer-widget p {
+        margin-bottom: 15px;
+        color: #bbb;
+        font-size: 15px; /* Slightly smaller for footer text */
+      }
+
+      .footer-links {
+        list-style: none;
+        padding-left: 0; /* Remove default padding */
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #bbb;
+        transition: color 0.3s ease, padding-left 0.3s ease; /* Added padding-left for hover effect */
+      }
+
+      .footer-links a:hover {
+        color: var(--secondary);
+        padding-left: 5px; /* Slight indent on hover */
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        padding-left: 0; /* Remove default padding if it was a UL */
+      }
+
+      .social-links a {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: var(--white);
+        font-size: 18px; /* Icon size */
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background-color: var(--secondary);
+        transform: translateY(-5px);
       }
 
       .copyright {
         text-align: center;
-        padding-top: 30px;
+        padding: 20px 0;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
-        color: #ccc;
+        color: #bbb;
         font-size: 14px;
       }
 
-      /* WhatsApp Button */
-      .whatsapp-button {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 60px;
-        height: 60px;
-        background-color: #25d366;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-size: 30px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        z-index: 999;
-        transition: transform 0.3s ease;
-      }
-
-      .whatsapp-button:hover {
-        transform: scale(1.1);
-      }
-
-      /* Responsive Design */
+      /* ---------- RESPONSIVE STYLES ---------- */
       @media (max-width: 992px) {
-        .services-grid,
-        .benefits-list {
-          grid-template-columns: repeat(2, 1fr);
+        .testimonial-container {
+          flex-direction: column;
         }
 
-        .footer-content {
-          grid-template-columns: repeat(2, 1fr);
+        .testimonial-video,
+        .testimonial-text {
+          width: 100%;
+          min-width: auto;
+        }
+
+        .testimonial-video iframe {
+          height: 300px;
+        }
+        .about-content {
+          flex-direction: column;
+        }
+        .about-img {
+          margin-bottom: 30px; /* Space when stacked */
+        }
+
+        .section-title h2 {
+          font-size: 30px;
+        }
+
+        .hero-content h1 {
+          font-size: 40px;
         }
       }
 
       @media (max-width: 768px) {
-        .mobile-nav {
-          display: block;
-          position: fixed;
-          top: 70px;
-          left: 0;
-          right: 0;
-          background-color: white;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-          padding: 20px;
-          z-index: 999;
-          transform: translateY(-100%);
-          opacity: 0;
-          transition: all 0.3s ease;
-        }
-        .mobile-nav.active {
-          transform: translateY(0);
-          opacity: 1;
+        .header-container {
+          padding: 15px 0; /* Adjust if header shrinks too much */
         }
 
-        .mobile-nav-toggle {
+        .hamburger {
           display: block;
+        }
+
+        nav {
+          position: fixed; /* Change from absolute to fixed */
+          top: 0; /* Align with very top of header */
+          left: 0;
+          width: 100%;
+          height: 100vh; /* Full height overlay */
+          z-index: 1000; /* Ensure it's above other content */
+          background-color: rgba(
+            255,
+            255,
+            255,
+            0.98
+          ); /* Slightly transparent white */
+          backdrop-filter: blur(5px); /* Nice blur effect if supported */
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+          clip-path: circle(0px at calc(100% - 35px) 35px);
+
+          transition: all 0.5s ease-out;
+          display: flex; /* For centering nav items */
+          align-items: center;
+          justify-content: center;
+        }
+
+        nav.active {
+          clip-path: circle(1000px at calc(100% - 35px) 35px);
+          /* Expand from hamburger */
+        }
+
+        nav ul {
+          flex-direction: column;
+          padding: 20px;
+          text-align: center; /* Center nav links */
+        }
+
+        nav ul li {
+          margin: 15px 0;
+        }
+        nav ul li a {
+          font-size: 20px; /* Larger for mobile menu */
+        }
+
+        .hero-content h1 {
+          font-size: 36px;
+        }
+
+        .hero-content p {
+          font-size: 18px;
+        }
+
+        .hero-btns {
+          flex-direction: column;
+          gap: 15px;
+          align-items: center; /* Center buttons when stacked */
+        }
+        .hero-btns .btn {
+          width: 80%; /* Make buttons wider on mobile stack */
+          max-width: 300px;
+        }
+
+        section {
+          padding: 60px 0;
+        }
+
+        .comparison-table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+          width: 100%;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        /* Optional: Add visual indicator for scrollable table */
+        .comparison-table:before {
+          content: "← Swipe to view →";
+          display: block;
+          text-align: center;
+          font-size: 14px;
+          padding: 5px;
+          color: var(--gray);
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr; /* Stack contact info and form */
+        }
+      }
+
+      @media (max-width: 576px) {
+        .products-grid,
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .product-card {
+          max-width: 100%;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .footer-widget h3::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .social-links {
+          justify-content: center;
+        }
+        .testimonial-video iframe {
+          height: 250px;
+        }
+
+        .highlight-quote {
+          font-size: 16px;
+          padding: 15px 20px;
+        }
+        .hero-content h1 {
+          font-size: 26px;
+          line-height: 1.3;
+        }
+
+        .hero-btns .btn {
+          width: 100%;
+          max-width: 250px;
+          padding: 10px 15px;
+        }
+
+        .section-title h2 {
+          font-size: 26px;
+        }
+        .section-title p {
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+
+        .logo img {
+          height: 35px;
+        }
+        .logo h1 {
+          font-size: 20px;
+        }
+        .btn {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+        .product-info h3 {
+          font-size: 18px;
+        }
+
+        section {
+          padding: 40px 0; /* Reduce section padding on mobile */
+        }
+
+        .section-title {
+          margin-bottom: 30px;
+        }
+
+        .product-info p {
+          font-size: 14px;
         }
       }
     </style>
   </head>
   <body>
-    <!-- WhatsApp Button -->
-    <a
-      href="https://wa.me/919687637511?text=I'm%20interested%20in%20your%20smart%20home%20services"
-      class="whatsapp-button"
-      target="_blank"
-      aria-label="Chat on WhatsApp"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="30"
-        height="30"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-      >
-        <path
-          d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"
-        />
-      </svg>
-    </a>
-
     <!-- Header -->
-    <header>
-      <div class="container">
-        <div class="header-inner">
-          <div class="logo"><span>KB</span> Switches & Home Automation</div>
-          <nav>
-            <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#products">Products</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#testimonials">Testimonials</a></li>
-            </ul>
-          </nav>
-          <a
-            href="https://wa.me/919687637511?text=I'd%20like%20to%20request%20a%20consultation"
-            class="cta-button"
-            target="_blank"
-            >Request Consultation</a
-          >
-          <button class="mobile-nav-toggle">☰</button>
+    <header id="header">
+      <div class="container header-container">
+        <div class="logo">
+          <h1>KB <span>Switches</span></h1>
         </div>
+
+        <div class="hamburger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
+        </div>
+
+        <nav>
+          <ul>
+            <li><a href="#hero" class="active">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#comparison">Comparison</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li>
-          <a
-            href="https://wa.me/919687637511?text=I'd%20like%20to%20request%20a%20consultation"
-            target="_blank"
-            >Request Consultation</a
-          >
-        </li>
-      </ul>
-    </div>
-
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="hero">
       <div class="container">
         <div class="hero-content">
-          <h1>Smart Switching & Automation for Home & Business</h1>
+          <h1>Smart Home Automation Solutions</h1>
           <p>
-            Transform your space with cutting-edge automation solutions tailored
-            to your lifestyle
+            Transform your home with our smart touch switches and home
+            automation systems. Control your home through touch, app, or voice
+            commands.
           </p>
-          <div class="hero-buttons">
-            <a
-              href="https://wa.me/919687637511?text=I'd%20like%20to%20request%20a%20consultation"
-              class="cta-button"
-              target="_blank"
-              >Request a Free Consultation</a
-            >
-            <a href="#products" class="secondary-button">Explore Products</a>
+          <div class="hero-btns">
+            <a href="#products" class="btn">Explore Products</a>
+            <a href="#contact" class="btn btn-secondary">Contact Us</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="section">
+    <!-- About Section -->
+    <section id="about">
       <div class="container">
-        <h2 class="section-title">Our Services</h2>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">⚡</div>
-            <h3 class="service-title">Switches & Sensors</h3>
-            <p>Smart switches and motion sensors for automated control</p>
-            <a href="#services">Learn More</a>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🔒</div>
-            <h3 class="service-title">Door Locks</h3>
-            <p>Secure, keyless entry systems for your property</p>
-            <a href="#services">Learn More</a>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">💡</div>
-            <h3 class="service-title">Lighting Control</h3>
-            <p>Advanced lighting solutions for ambiance and efficiency</p>
-            <a href="#services">Learn More</a>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🏠</div>
-            <h3 class="service-title">Custom Automation</h3>
-            <p>Tailored smart home systems for your unique needs</p>
-            <a href="#services">Learn More</a>
-          </div>
+        <div class="section-title">
+          <h2>About Us</h2>
+          <p>
+            Learn more about B.R ENTERPRISE and our journey in home automation
+          </p>
         </div>
-      </div>
-    </section>
 
-    <!-- Featured Project -->
-    <section id="projects" class="section">
-      <div class="container">
-        <h2 class="section-title">Featured Project</h2>
-        <div class="featured-project">
-          <div class="before-after">
-            <div class="before"></div>
-            <div class="after"></div>
-            <div class="slider"></div>
+        <div class="about-content">
+          <div class="about-img">
+            <img src="./images/about.png" alt="Smart Home Automation" />
           </div>
-          <div class="project-description">
-            <h3>Luxury Bungalow Transformation</h3>
+
+          <div class="about-text">
+            <h2>B.R ENTERPRISE</h2>
             <p>
-              Complete smart home integration with automated lighting, security,
-              and entertainment systems
+              Established in 2019, B.R ENTERPRISE has been a pioneer in the home
+              automation industry under the registered brands KB Switches and KB
+              Lights. Started under the guidance of our company MD, we have been
+              on a journey to expand across India with innovative smart home
+              solutions.
             </p>
-            <a href="#projects">View All Projects</a>
+
+            <p>
+              Our business focuses on Home Automation systems (both semi and
+              fully automatic), Smart Switches, and Lighting Products including
+              T5, bulbs, sensor lights, and more. We aim to solve real problems
+              using smart technology throughout India.
+            </p>
+
+            <p>
+              As an MSME Certified Manufacturing Company in India, we take pride
+              in our "Made in India" products that meet high standards of
+              quality and comply with all regulations and safety norms. Our team
+              uses the latest testing methods to ensure quality before delivery.
+            </p>
+
+            <div class="about-features">
+              <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <p>Innovative Smart Home Solutions</p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <p>Quality Manufacturing in India</p>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <p>Comprehensive Product Range</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="section">
+    <!-- Products Section -->
+    <section id="products">
       <div class="container">
-        <h2 class="section-title">Why Choose Us</h2>
-        <div class="benefits">
-          <div class="benefits-list">
-            <div class="benefit-item">
-              <div class="benefit-icon">🛠️</div>
-              <h3>Custom Installations</h3>
-              <p>Tailored solutions for your specific needs</p>
+        <div class="section-title">
+          <h2>Our Products</h2>
+          <p>
+            Discover our range of smart touch switches and home automation
+            products
+          </p>
+        </div>
+
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-img">
+              <img src="./images/4_switch.png" alt="4-Switch" />
             </div>
-            <div class="benefit-item">
-              <div class="benefit-icon">📱</div>
-              <h3>Mobile Control</h3>
-              <p>Control your home from anywhere</p>
+            <div class="product-info">
+              <h3>4-Switch (KB 001)</h3>
+              <p>
+                Control up to 4 individual loads with this smart touch switch.
+                Perfect for LED lights, ceiling lights, charging cables, TV, and
+                computers.
+              </p>
+              <a href="#contact" class="btn">Enquire Now</a>
             </div>
-            <div class="benefit-item">
-              <div class="benefit-icon">🔧</div>
-              <h3>24×7 Support</h3>
-              <p>Technical assistance whenever you need it</p>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img src="./images/15A_switch.png" alt="15A-Switch" />
             </div>
-            <div class="benefit-item">
-              <div class="benefit-icon">👥</div>
-              <h3>Trusted by 50+ Clients</h3>
-              <p>Proven track record of excellence</p>
+            <div class="product-info">
+              <h3>15A-Switch (KB 002)</h3>
+              <p>
+                High power switch with 2 individual load controls. Ideal for AC
+                (up to 2 Ton), refrigerator, microwave, oven, and other
+                high-power appliances.
+              </p>
+              <a href="#contact" class="btn">Enquire Now</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1586520748101-c2ffd07c7969?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                alt="24A-Switch"
+              />
+            </div>
+            <div class="product-info">
+              <h3>24A-Switch (KB 003)</h3>
+              <p>
+                Extra high power switch for geyser, room heater, large oven, 2hp
+                motor, and AC (up to 3 Ton). Handles up to 3500W resistive load.
+              </p>
+              <a href="#contact" class="btn">Enquire Now</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                alt="2 Way Switch"
+              />
+            </div>
+            <div class="product-info">
+              <h3>2 Way Switch (KB 004)</h3>
+              <p>
+                Control lights from multiple locations. Perfect for staircase
+                lights and parking area lights with smart control capabilities.
+              </p>
+              <a href="#contact" class="btn">Enquire Now</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1550104375-c8d82dca1d66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                alt="Fan Regulator"
+              />
+            </div>
+            <div class="product-info">
+              <h3>Fan Regulator (KB 005)</h3>
+              <p>
+                Smart fan speed controller with 5-step fan coil speed control.
+                Control your ceiling fan through touch, app, or voice commands.
+              </p>
+              <a href="#contact" class="btn">Enquire Now</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img src="./images/bell_switch.png" alt="Bell Switch" />
+            </div>
+            <div class="product-info">
+              <h3>Bell Switch (KB 006)</h3>
+              <p>
+                Smart bell control switch for outdoor and office bell
+                applications. Control and monitor your doorbell remotely.
+              </p>
+              <a href="#contact" class="btn">Enquire Now</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Testimonials -->
-    <section id="testimonials" class="section testimonials">
+    <!-- Features Section -->
+    <section id="features">
       <div class="container">
-        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="section-title">
+          <h2>Key Features</h2>
+          <p>Discover what makes our smart switches stand out</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-box">
+            <i>🖐️</i>
+            <h3>Touch Control</h3>
+            <p>
+              Elegant touch-sensitive surface for easy physical control of your
+              switches.
+            </p>
+          </div>
+
+          <div class="feature-box">
+            <i>📱</i>
+            <h3>Smart Life App</h3>
+            <p>
+              Control all your devices remotely through our intuitive Smart Life
+              App on Android or iOS.
+            </p>
+          </div>
+
+          <div class="feature-box">
+            <i>🗣️</i>
+            <h3>Voice Control</h3>
+            <p>
+              Compatible with Alexa, Google Assistant, and Siri for hands-free
+              control.
+            </p>
+          </div>
+
+          <div class="feature-box">
+            <i>📡</i>
+            <h3>WiFi Connectivity</h3>
+            <p>
+              Connect to your home network using 2.4GHz WiFi for seamless
+              integration.
+            </p>
+          </div>
+
+          <div class="feature-box">
+            <i>📊</i>
+            <h3>Live Status</h3>
+            <p>
+              Monitor the on/off state of your switches in real-time from
+              anywhere.
+            </p>
+          </div>
+
+          <div class="feature-box">
+            <i>🔄</i>
+            <h3>Easy Configuration</h3>
+            <p>
+              Simple setup process and the ability to change configurations
+              anytime.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison">
+      <div class="container">
+        <div class="section-title">
+          <h2>Product Comparison</h2>
+          <p>See how KB Switches compare to traditional options</p>
+        </div>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Features</th>
+              <th>KB Switches</th>
+              <th>Wired Automation</th>
+              <th>Non Touch</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Touch Control</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>WiFi Connectivity</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Voice Command</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Existing Wiring</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Easy Configuration</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Live Status</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td>Unlimited Integration</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Aesthetic Looks</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Indian Modular Standard</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Anytime Configuration Change</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="section-title">
+          <h2>Customer Testimonials</h2>
+          <p>
+            Hear what our valued partners and dealers have to say about KB
+            Switches
+          </p>
+        </div>
+
         <div class="testimonial-container">
-          <div class="testimonial-track">
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p class="testimonial-text">
-                  "KB Switches transformed our home with their innovative
-                  automation solutions. The lighting control system has been a
-                  game-changer for us."
-                </p>
-                <p class="testimonial-author">
-                  - Rajesh Patel, Residential Client
-                </p>
-              </div>
-            </div>
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p class="testimonial-text">
-                  "The team's expertise in commercial automation helped us
-                  reduce energy costs by 30%. Highly recommended for business
-                  owners."
-                </p>
-                <p class="testimonial-author">- Priya Shah, Business Owner</p>
-              </div>
-            </div>
-            <div class="testimonial">
-              <div class="testimonial-content">
-                <p class="testimonial-text">
-                  "From consultation to installation, the entire process was
-                  seamless. Their after-sales support is exceptional."
-                </p>
-                <p class="testimonial-author">- Amit Desai, Villa Owner</p>
+          <div class="testimonial-video">
+            <!-- Replace YOUR_YOUTUBE_VIDEO_ID with the actual YouTube video ID -->
+            <iframe
+              src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <div class="testimonial-text">
+            <h3>Ramesh Choudhury</h3>
+            <p class="role">
+              Owner, RJ Lights and Electricals, Surat<br />KB Switches &
+              Automation Dealer since 2019
+            </p>
+
+            <div class="testimonial-quotes">
+              <p>
+                <i
+                  >"I've been a dealer for KB Switches and Automation since 2019
+                  and have completed 200-250 projects across India."</i
+                >
+              </p>
+
+              <p>
+                <i
+                  >"The plate variations, colors, and symbol combinations are a
+                  great feature – I can provide any design required by
+                  architects and interior designers. There are literally
+                  thousands of symbol options available!"</i
+                >
+              </p>
+
+              <div class="highlight-quote">
+                <i
+                  >"The best part about KB Switches is the service. If any
+                  client has trouble, service is available within 24 hours. If
+                  you want to go for automation, I prefer and recommend
+                  installing KB Switches."</i
+                >
               </div>
             </div>
           </div>
         </div>
-        <div class="testimonial-nav">
-          <div class="testimonial-dot active" data-index="0"></div>
-          <div class="testimonial-dot" data-index="1"></div>
-          <div class="testimonial-dot" data-index="2"></div>
-        </div>
       </div>
     </section>
 
-    <!-- CTA Banner -->
-    <section class="cta-banner">
+    <!-- Contact Section -->
+    <section id="contact">
       <div class="container">
-        <h2>Ready to automate your space?</h2>
-        <a
-          href="https://wa.me/919687637511?text=I'd%20like%20to%20request%20a%20consultation"
-          class="cta-button"
-          target="_blank"
-          >Request a Consultation</a
-        >
+        <div class="section-title">
+          <h2>Contact Us</h2>
+          <p>Get in touch with our team for inquiries and support</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Get In Touch</h3>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i>📍</i>
+              </div>
+              <div class="contact-text">
+                <h4>Our Address</h4>
+                <p>
+                  KB Switches and Home Automation, A-183 Ambica Industrial-2,
+                  Near Olive Circle, Gandhi Kutir Road, Bhattar, Surat - 395017
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i>📱</i>
+              </div>
+              <div class="contact-text">
+                <h4>Phone Numbers</h4>
+                <p>Customer Care: 7990414919</p>
+                <p>General Contact: 9687637511</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i>✉️</i>
+              </div>
+              <div class="contact-text">
+                <h4>Email</h4>
+                <p>KBLIGHTS29@GMAIL.COM</p>
+              </div>
+            </div>
+
+            <div class="social-links">
+              <a href="#"><i>FB</i></a>
+              <a href="#"><i>YT</i></a>
+              <a href="#"><i>IM</i></a>
+              <a href="#"><i>WA</i></a>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3>Send us a message</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="Your Name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Your Email"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subject"
+                  placeholder="Subject"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  id="message"
+                  placeholder="Your Message"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
     <footer>
       <div class="container">
-        <div class="footer-content">
-          <div class="footer-column">
-            <h3>KB Switches & Home Automation</h3>
-            <p>Smart solutions for modern living and business spaces.</p>
+        <div class="footer-grid">
+          <div class="footer-widget">
+            <h3>About KB Switches</h3>
+            <p>
+              B.R ENTERPRISE established in 2019 is a leading manufacturer of
+              smart home automation systems under the registered brands KB
+              Switches and KB Lights. Our products are proudly Made in India.
+            </p>
+            <div class="social-links">
+              <a href="#"><i>FB</i></a>
+              <a href="#"><i>YT</i></a>
+              <a href="#"><i>IM</i></a>
+              <a href="#"><i>WA</i></a>
+            </div>
           </div>
-          <div class="footer-column">
+
+          <div class="footer-widget">
+            <h3>Products</h3>
+            <ul class="footer-links">
+              <li><a href="#products">4-Switch (KB 001)</a></li>
+              <li><a href="#products">15A-Switch (KB 002)</a></li>
+              <li><a href="#products">24A-Switch (KB 003)</a></li>
+              <li><a href="#products">2 Way Switch (KB 004)</a></li>
+              <li><a href="#products">Fan Regulator (KB 005)</a></li>
+              <li><a href="#products">Bell Switch (KB 006)</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-widget">
             <h3>Quick Links</h3>
-            <ul>
-              <li><a href="#home">Home</a></li>
+            <ul class="footer-links">
+              <li><a href="#hero">Home</a></li>
               <li><a href="#about">About Us</a></li>
-              <li><a href="#services">Services</a></li>
               <li><a href="#products">Products</a></li>
-              <li><a href="#projects">Projects</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#comparison">Comparison</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
-          <div class="footer-column">
-            <h3>Contact Us</h3>
-            <ul>
-              <li>Email: kblights29@gmail.com</li>
-              <li>Phone: 9687637511</li>
-              <li>Customer Care: 7990414919</li>
+
+          <div class="footer-widget">
+            <h3>Business Hours</h3>
+            <ul class="footer-links">
+              <li>Monday - Friday: 9:00 AM - 6:00 PM</li>
+              <li>Saturday: 9:00 AM - 4:00 PM</li>
+              <li>Sunday: Closed</li>
             </ul>
-          </div>
-          <div class="footer-column">
-            <h3>Follow Us</h3>
-            <ul>
-              <li>
-                <a href="https://instagram.com/kb.switches" target="_blank"
-                  >Instagram</a
-                >
-              </li>
-            </ul>
+            <p>
+              For urgent inquiries outside business hours, please email us and
+              we'll get back to you as soon as possible.
+            </p>
           </div>
         </div>
+
         <div class="copyright">
-          <p>&copy; 2025 KB Switches & Home Automation. All Rights Reserved.</p>
+          <p>&copy; 2025 KB Switches - B.R ENTERPRISE. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-      // Mobile Navigation Toggle
-      const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
-      const mobileNav = document.querySelector(".mobile-nav");
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector(".hamburger");
+        const nav = document.querySelector("nav");
 
-      mobileNavToggle.addEventListener("click", function () {
-        mobileNav.classList.toggle("active");
-      });
+        if (hamburger && nav) {
+          hamburger.addEventListener("click", () => {
+            nav.classList.toggle("active");
+            hamburger.classList.toggle("active");
+          });
+        }
 
-      // Before-After Slider
-      const slider = document.querySelector(".slider");
-      const beforeAfter = document.querySelector(".before-after");
-      const after = document.querySelector(".after");
+        // Add this code to detect and handle missing images
+        document.addEventListener("DOMContentLoaded", function () {
+          const images = document.querySelectorAll("img");
 
-      let isDown = false;
+          images.forEach((img) => {
+            img.onerror = function () {
+              this.src = "https://via.placeholder.com/300x200?text=KB+Switches";
+              this.onerror = null;
+            };
+          });
+        });
 
-      slider.addEventListener("mousedown", () => {
-        isDown = true;
-      });
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
 
-      window.addEventListener("mouseup", () => {
-        isDown = false;
-      });
+            const href = this.getAttribute("href");
+            const target = document.querySelector(href);
 
-      window.addEventListener("mousemove", (e) => {
-        if (!isDown) return;
-        const rect = beforeAfter.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const percent = (x / rect.width) * 100;
+            // Close mobile menu if open and if it's a link within the page
+            if (
+              nav &&
+              nav.classList.contains("active") &&
+              href.startsWith("#")
+            ) {
+              nav.classList.remove("active");
+              if (hamburger) hamburger.classList.remove("active");
+            }
 
-        if (percent > 0 && percent < 100) {
-          slider.style.left = `${percent}%`;
-          after.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0% 100%)`;
+            if (target) {
+              let headerOffset = 80;
+              const header = document.getElementById("header");
+              if (header) {
+                // A more precise way would be to get its actual height
+                // but for this demo, 80 is the initial plan.
+                // If header shrinks, this might need adjustment or make headerOffset dynamic.
+              }
+
+              window.scrollTo({
+                top: target.offsetTop - headerOffset,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // Active Navigation Highlighting
+        const sections = document.querySelectorAll("section[id]"); // Ensure sections have IDs
+        const navLinks = document.querySelectorAll("nav ul li a");
+
+        function changeNav() {
+          let index = sections.length;
+
+          while (--index && window.scrollY + 100 < sections[index].offsetTop) {}
+
+          navLinks.forEach((link) => link.classList.remove("active"));
+          // Ensure there's a corresponding link for the current section
+          if (sections[index] && sections[index].getAttribute("id")) {
+            const activeLink = document.querySelector(
+              `nav ul li a[href="#${sections[index].getAttribute("id")}"]`
+            );
+            if (activeLink) {
+              activeLink.classList.add("active");
+            }
+          } else if (window.scrollY < sections[0].offsetTop - 100) {
+            // Default to home if above all sections
+            const homeLink = document.querySelector(
+              'nav ul li a[href="#hero"]'
+            );
+            if (homeLink) homeLink.classList.add("active");
+          }
+        }
+
+        // Initial call to set active link on page load
+        if (sections.length > 0 && navLinks.length > 0) {
+          changeNav();
+          window.addEventListener("scroll", changeNav);
+        }
+
+        // Shrink Header on Scroll
+        const header = document.getElementById("header");
+        const headerContainer = document.querySelector(".header-container"); // Get the container for padding
+        const initialHeaderContainerPadding = "20px 0"; // From CSS
+        const scrolledHeaderContainerPadding = "10px 0"; // Desired scrolled padding
+
+        if (header && headerContainer) {
+          const initialHeaderHeight = header.offsetHeight; // Store initial height
+
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+              // Sooner trigger for visual effect
+              // header.style.padding = "5px 0"; // Padding on header itself
+              if (headerContainer)
+                headerContainer.style.padding = scrolledHeaderContainerPadding;
+              header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+            } else {
+              // header.style.padding = ""; // Reset padding on header
+              if (headerContainer)
+                headerContainer.style.padding = initialHeaderContainerPadding;
+              header.style.boxShadow = "var(--box-shadow)"; // Reset to original CSS variable
+            }
+          });
+        }
+
+        // Contact Form Submission
+        const contactForm = document.getElementById("contactForm");
+
+        if (contactForm) {
+          contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            // const email = document.getElementById("email").value;
+            // const subject = document.getElementById("subject").value;
+            // const message = document.getElementById("message").value;
+
+            alert(
+              `Thank you for your message, ${name}! We will get back to you soon.`
+            );
+
+            contactForm.reset();
+          });
+        }
+
+        // Product Image Animation on Scroll (Intersection Observer)
+        const productCards = document.querySelectorAll(".product-card");
+
+        if ("IntersectionObserver" in window) {
+          const observerOptions = {
+            root: null, // relative to document viewport
+            rootMargin: "0px",
+            threshold: 0.1, // 10% of item visible
+          };
+
+          const observer = new IntersectionObserver(
+            (entries, observerInstance) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.style.opacity = "1";
+                  entry.target.style.transform = "translateY(0)";
+                  observerInstance.unobserve(entry.target); // Optional: stop observing after animation
+                }
+              });
+            },
+            observerOptions
+          );
+
+          productCards.forEach((card) => {
+            // Set initial state for animation
+            card.style.opacity = "0";
+            card.style.transform = "translateY(40px)";
+            // card.style.transition is already set in CSS
+            observer.observe(card);
+          });
+        } else {
+          // Fallback for browsers that don't support IntersectionObserver
+          productCards.forEach((card) => {
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          });
         }
       });
-
-      // For touch devices
-      slider.addEventListener("touchstart", () => {
-        isDown = true;
-      });
-
-      window.addEventListener("touchend", () => {
-        isDown = false;
-      });
-
-      window.addEventListener("touchmove", (e) => {
-        if (!isDown) return;
-        const rect = beforeAfter.getBoundingClientRect();
-        const x = e.touches[0].clientX - rect.left;
-        const percent = (x / rect.width) * 100;
-
-        if (percent > 0 && percent < 100) {
-          slider.style.left = `${percent}%`;
-          after.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0% 100%)`;
-        }
-      });
-
-      // Testimonial Slider
-      const testimonialTrack = document.querySelector(".testimonial-track");
-      const testimonials = document.querySelectorAll(".testimonial");
-      const dots = document.querySelectorAll(".testimonial-dot");
-
-      dots.forEach((dot) => {
-        dot.addEventListener("click", () => {
-          const index = dot.dataset.index;
-
-          // Update active dot
-          dots.forEach((d) => d.classList.remove("active"));
-          dot.classList.add("active");
-
-          // Move track
-          testimonialTrack.style.transform = `translateX(-${index * 100}%)`;
-        });
-      });
-
-      // Auto rotate testimonials
-      let currentTestimonial = 0;
-
-      function rotateTestimonials() {
-        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-
-        // Update active dot
-        dots.forEach((d) => d.classList.remove("active"));
-        dots[currentTestimonial].classList.add("active");
-
-        // Move track
-        testimonialTrack.style.transform = `translateX(-${
-          currentTestimonial * 100
-        }%)`;
-      }
-
-      // Rotate every 5 seconds
-      setInterval(rotateTestimonials, 5000);
-
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          if (this.getAttribute("href") === "#") return;
-
-          e.preventDefault();
-
-          const targetId = this.getAttribute("href");
-          const targetElement = document.querySelector(targetId);
-
-          if (targetElement) {
-            // Close mobile menu if open
-            mobileNav.classList.remove("active");
-
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: "smooth",
-            });
-          }
-        });
-      });
-
-      // Add fadeIn animations on scroll
-      const observerOptions = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-          }
-        });
-      }, observerOptions);
-
-      // Apply to section titles and cards
-      document
-        .querySelectorAll(
-          ".section-title, .service-card, .featured-project, .benefit-item"
-        )
-        .forEach((el) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(20px)";
-          el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-          observer.observe(el);
-        });
     </script>
   </body>
 </html>
