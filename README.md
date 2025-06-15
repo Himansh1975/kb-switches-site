@@ -1,87 +1,71 @@
-# Welcome to React Router!
+# KB Switches - Smart Home Automation Website
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A modern React-based website for KB Switches™, showcasing smart home automation products including WiFi switches, smart locks, and sensors.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Tech Stack
 
-## Features
+- **React 19** - Modern React with hooks
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **Lucide React** - Beautiful icons
+- **ESLint** - Code linting and formatting
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Quick Start
 
-## Getting Started
+1. **Clone the repository**:
 
-### Installation
+```bash
+git clone <your-repo-url>
+cd React-KBswitches
+```
 
-Install the dependencies:
+2. **Install dependencies**:
 
 ```bash
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
+3. **Start development server**:
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
+4. **Build for production**:
 
 ```bash
 npm run build
 ```
 
-## Deployment
+## Features
 
-### Docker Deployment
+- 📱 Responsive design for all devices
+- ⚡ Fast loading with modern build tools
+- 🎨 Modern UI with Tailwind CSS
+- 🔧 Easy to maintain component structure
+- 🚀 Optimized for performance
 
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+## Project Structure
 
 ```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+src/
+├── components/          # Reusable React components
+│   ├── Header.jsx
+│   └── ProductCard.jsx
+├── data/               # Product data and constants
+│   └── products.js
+├── App.jsx            # Main application component
+├── main.jsx           # Application entry point
+└── index.css          # Global styles
 ```
 
-## Styling
+## Development
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+- Run `npm run dev` for development
+- Run `npm run build` for production build
+- Run `npm run preview` to preview production build
+- Run `npm run lint` to check code quality
 
----
+## License
 
-Built with ❤️ using React Router.
+© 2024 B.R. ENTERPRISE. All rights reserved.
