@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/kb-switches-site/', // Your repository name
+  base: '/', // Changed for custom domain (root path)
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
