@@ -1,6 +1,7 @@
 {
   "name": "kb-switches-website",
   "description": "KB Switches - Smart Home Automation Website",
+  "homepage": "https://himansh1975.github.io/kb-switches-site",
   "private": true,
   "version": "0.0.0",
   "type": "module",
