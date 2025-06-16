@@ -1,0 +1,1255 @@
+import React, { useState, useEffect } from 'react';
+import {
+  Menu,
+  X,
+  Wifi,
+  Smartphone,
+  Mic,
+  Zap,
+  Shield,
+  Star,
+  Phone,
+  Mail,
+  MapPin,
+  ChevronRight,
+  Play,
+  Award,
+  Users,
+  Lightbulb,
+  Lock,
+  Camera,
+  Calendar,
+  ArrowUp,
+  Power,
+  Home,
+  Cpu,
+  Activity,
+  Gauge,
+  WifiOff,
+  Timer,
+  Thermometer,
+  Cloud,
+  Sparkles,
+  Settings,
+  CheckCircle,
+  CircuitBoard,
+  Quote,
+  ThumbsUp,
+  Building,
+  Truck,
+  MessageSquare
+} from 'lucide-react';
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [activeProduct, setActiveProduct] = useState(0);
+  const [activeCategory, setActiveCategory] = useState('switches');
+  const [expandedProduct, setExpandedProduct] = useState(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveProduct((prev) => (prev + 1) % 6);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Updated product categories
+  const productCategories = [
+    {
+      id: 'switches',
+      name: 'Smart Switches',
+      icon: <Zap className="w-5 h-5" />,
+      description: 'From basic lighting to heavy-duty appliances - we\'ve got you covered',
+      products: [
+        {
+          modelNumber: "KB 001",
+          name: "4 Touch Switch",
+          description: "Perfect for modern homes with multiple lighting needs",
+          shortDesc: "Control 4 different lights or devices independently",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "450W incandescent, 120W LED",
+          loadControls: "4",
+          applications: ["LED lights", "Ceiling lights", "charging cable", "T.V", "Computers"],
+          benefits: ["Individual control", "Energy saving", "Voice compatible", "Schedule timers"],
+          icon: <Zap className="w-6 h-6" />,
+          colorClass: "blue",
+          type: "switch",
+          bestFor: "Living rooms, bedrooms"
+        },
+        {
+          modelNumber: "KB 002",
+          name: "15A Heavy Duty Switch",
+          description: "Built for high-power appliances and heavy loads",
+          shortDesc: "Perfect for air conditioners and major appliances",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "2000W",
+          loadControls: "2",
+          applications: ["A.C (up to 2 Ton)", "Refrigerator", "Microwave", "Oven", "Iron", "Flour mill"],
+          benefits: ["High capacity", "Surge protection", "Remote control", "Energy monitoring"],
+          icon: <Power className="w-6 h-6" />,
+          colorClass: "purple",
+          type: "switch",
+          bestFor: "Kitchen, utility room"
+        },
+        {
+          modelNumber: "KB 003",
+          name: "24A Industrial Switch",
+          description: "Maximum power handling for industrial applications",
+          shortDesc: "Ultimate switch for geysers and heavy machinery",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "3500W",
+          loadControls: "1",
+          applications: ["Geyser", "Room heater", "large Oven", "2hp motor", "A.C (up to 3 Ton)"],
+          benefits: ["Maximum capacity", "Industrial grade", "Safety features", "Durable design"],
+          icon: <Gauge className="w-6 h-6" />,
+          colorClass: "red",
+          type: "switch",
+          bestFor: "Water heaters, heavy appliances"
+        },
+        {
+          modelNumber: "KB 004",
+          name: "2 Way Smart Switch",
+          description: "Dual control for staircases and multiple entry points",
+          shortDesc: "Control one light from two different locations",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "450W",
+          loadControls: "2",
+          applications: ["Staircase lights", "Parking area light"],
+          benefits: ["Dual control", "Convenient access", "Smart automation", "Memory function"],
+          icon: <Activity className="w-6 h-6" />,
+          colorClass: "green",
+          type: "switch",
+          bestFor: "Staircases, corridors"
+        },
+        {
+          modelNumber: "KB 005",
+          name: "Smart Fan Controller",
+          description: "Silent speed control with 5-step precision",
+          shortDesc: "Smooth, noise-free fan speed control",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "100W Capacitor based",
+          features: "Humming Free, 5-step fan coil speed output",
+          applications: ["Ceiling Fan"],
+          benefits: ["Silent operation", "5 speed levels", "Energy efficient", "Smart scheduling"],
+          icon: <Settings className="w-6 h-6" />,
+          colorClass: "cyan",
+          type: "switch",
+          bestFor: "Bedrooms, living areas"
+        },
+        {
+          modelNumber: "KB 006",
+          name: "Smart Bell Switch",
+          description: "Intelligent doorbell control system",
+          shortDesc: "Smart control for doorbells and intercoms",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "120W",
+          applications: ["Outdoor bell", "Office bell"],
+          benefits: ["Remote notifications", "Multiple tones", "Guest management", "Security integration"],
+          icon: <Home className="w-6 h-6" />,
+          colorClass: "orange",
+          type: "switch",
+          bestFor: "Main entrance, offices"
+        }
+      ]
+    },
+    {
+      id: 'lights',
+      name: 'Smart Lighting',
+      icon: <Lightbulb className="w-5 h-5" />,
+      description: 'Complete lighting solutions for homes and commercial spaces',
+      products: [
+        {
+          name: "LED T5 Tubes",
+          description: "Energy-efficient commercial lighting",
+          shortDesc: "Long-lasting, bright commercial lighting",
+          applications: ["Offices", "Shops", "Warehouses"],
+          benefits: ["80% energy saving", "50,000 hour life", "Instant on", "Cool operation"],
+          icon: <Lightbulb className="w-6 h-6" />,
+          colorClass: "yellow",
+          bestFor: "Commercial spaces"
+        },
+        {
+          name: "Smart LED Bulbs",
+          description: "WiFi-controlled color changing bulbs",
+          shortDesc: "Millions of colors, voice control, scheduling",
+          applications: ["Living rooms", "Bedrooms", "Study rooms"],
+          benefits: ["Color changing", "Dimming control", "Voice commands", "Energy monitoring"],
+          icon: <Lightbulb className="w-6 h-6" />,
+          colorClass: "yellow",
+          bestFor: "Home ambiance"
+        },
+        {
+          name: "Motion Sensor Lights",
+          description: "Automatic lighting with PIR sensors",
+          shortDesc: "Hands-free lighting that turns on automatically",
+          applications: ["Corridors", "Bathrooms", "Outdoor areas"],
+          benefits: ["Auto on/off", "Energy saving", "Security feature", "Adjustable sensitivity"],
+          icon: <Camera className="w-6 h-6" />,
+          colorClass: "yellow",
+          bestFor: "Security, convenience"
+        }
+      ]
+    },
+    {
+      id: 'automation',
+      name: 'Home Automation',
+      icon: <Cpu className="w-5 h-5" />,
+      description: 'Complete smart home solutions and specialty switches',
+      products: [
+        {
+          name: "Hotel Switch Panels",
+          description: "Professional switches for hospitality",
+          shortDesc: "Specialized switches for hotels and guest houses",
+          variants: ["Do not Disturb", "Clean Room", "Master Control"],
+          applications: ["Hotels", "Resorts", "Guest houses"],
+          benefits: ["Guest convenience", "Staff efficiency", "Professional look", "Durable design"],
+          icon: <Building className="w-6 h-6" />,
+          colorClass: "purple",
+          bestFor: "Hospitality industry"
+        },
+        {
+          name: "Scene Controllers",
+          description: "Control multiple devices with one touch",
+          shortDesc: "Create lighting scenes and automation rules",
+          applications: ["Living rooms", "Conference rooms", "Restaurants"],
+          benefits: ["One-touch scenes", "Mood lighting", "Energy saving", "Easy setup"],
+          icon: <Settings className="w-6 h-6" />,
+          colorClass: "purple",
+          bestFor: "Entertainment areas"
+        }
+      ]
+    }
+  ];
+
+  const products = productCategories[0].products; // For hero rotation
+
+  const features = [
+    {
+      icon: <Smartphone className="w-8 h-8" />,
+      title: "Smart Life App",
+      description: "Control all devices from your Android/iOS smartphone with intuitive interface",
+      bgPattern: "diagonal-lines"
+    },
+    {
+      icon: <Mic className="w-8 h-8" />,
+      title: "Voice Control",
+      description: "Compatible with Amazon Alexa & Google Assistant for hands-free control",
+      bgPattern: "dots"
+    },
+    {
+      icon: <Wifi className="w-8 h-8" />,
+      title: "WiFi Connectivity",
+      description: "Reliable 2.4GHz WiFi connection for seamless smart home integration",
+      bgPattern: "circuit"
+    },
+    {
+      icon: <Zap className="w-8 h-8" />,
+      title: "Touch Control",
+      description: "Premium touch interface with memory function and LED indicators",
+      bgPattern: "waves"
+    }
+  ];
+
+  const certifications = [
+    { name: "ISO 9001:2015", icon: <Shield className="w-6 h-6" /> },
+    { name: "CE Certified", icon: <CheckCircle className="w-6 h-6" /> },
+    { name: "RoHS Compliant", icon: <Award className="w-6 h-6" /> },
+    { name: "Make in India", icon: <Star className="w-6 h-6" /> }
+  ];
+
+  // Testimonials to replace gallery
+  const testimonials = [
+    {
+      id: 1,
+      name: "Rajesh Patel",
+      location: "Ahmedabad",
+      rating: 5,
+      text: "KB switches transformed my home completely. The app control is fantastic and installation was smooth.",
+      project: "3 BHK Villa",
+      avatar: "RP"
+    },
+    {
+      id: 2,
+      name: "Priya Sharma",
+      location: "Mumbai",
+      rating: 5,
+      text: "Love the voice control feature! Quality is excellent and customer service is very responsive.",
+      project: "2 BHK Apartment",
+      avatar: "PS"
+    },
+    {
+      id: 3,
+      name: "Arjun Mehta",
+      location: "Delhi",
+      rating: 5,
+      text: "Installed 25 switches for my hotel. Guests love the convenience and the switches are very durable.",
+      project: "Boutique Hotel",
+      avatar: "AM"
+    },
+    {
+      id: 4,
+      name: "Sneha Joshi",
+      location: "Pune",
+      rating: 5,
+      text: "The fan regulator is amazing - completely silent operation. Highly recommend KB switches.",
+      project: "4 BHK House",
+      avatar: "SJ"
+    },
+    {
+      id: 5,
+      name: "Vikram Singh",
+      location: "Jaipur",
+      rating: 5,
+      text: "Great product range and competitive pricing. Perfect for builder projects.",
+      project: "Residential Complex",
+      avatar: "VS"
+    },
+    {
+      id: 6,
+      name: "Meera Shah",
+      location: "Surat",
+      rating: 5,
+      text: "Easy installation and the app interface is very user-friendly. Worth every rupee!",
+      project: "Smart Home Setup",
+      avatar: "MS"
+    }
+  ];
+
+  // Case studies to replace videos
+  const caseStudies = [
+    {
+      id: 1,
+      title: "Luxury Villa Automation",
+      description: "Complete smart home setup with 50+ KB switches",
+      location: "Gandhinagar",
+      scope: "Full home automation",
+      savings: "35% energy reduction"
+    },
+    {
+      id: 2,
+      title: "Hotel Chain Implementation",
+      description: "500+ rooms equipped with KB smart switches",
+      location: "Rajasthan",
+      scope: "Hospitality automation",
+      savings: "Guest satisfaction +40%"
+    },
+    {
+      id: 3,
+      title: "Office Complex Project",
+      description: "Corporate building with centralized control",
+      location: "Mumbai",
+      scope: "Commercial automation",
+      savings: "25% operational cost cut"
+    },
+    {
+      id: 4,
+      title: "Residential Society",
+      description: "200 apartments with smart lighting solutions",
+      location: "Pune",
+      scope: "Community automation",
+      savings: "30% electricity bill reduction"
+    },
+    {
+      id: 5,
+      title: "Retail Chain Stores",
+      description: "Smart lighting across 15 store locations",
+      location: "Gujarat",
+      scope: "Retail automation",
+      savings: "Remote monitoring enabled"
+    },
+    {
+      id: 6,
+      title: "Educational Institution",
+      description: "Smart switches in 100+ classrooms",
+      location: "Ahmedabad",
+      scope: "Educational automation",
+      savings: "Centralized control achieved"
+    }
+  ];
+
+  // Helper function to get color classes
+  const getColorClasses = (colorClass) => {
+    const colorMap = {
+      blue: {
+        bg: 'bg-blue-50',
+        text: 'text-blue-800',
+        icon: 'text-blue-600',
+        button: 'bg-blue-600 hover:bg-blue-700',
+        gradient: 'from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800',
+        border: 'border-blue-200'
+      },
+      purple: {
+        bg: 'bg-purple-50',
+        text: 'text-purple-800',
+        icon: 'text-purple-600',
+        button: 'bg-purple-600 hover:bg-purple-700',
+        gradient: 'from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800',
+        border: 'border-purple-200'
+      },
+      red: {
+        bg: 'bg-red-50',
+        text: 'text-red-800',
+        icon: 'text-red-600',
+        button: 'bg-red-600 hover:bg-red-700',
+        gradient: 'from-red-600 to-red-700 hover:from-red-700 hover:to-red-800',
+        border: 'border-red-200'
+      },
+      green: {
+        bg: 'bg-green-50',
+        text: 'text-green-800',
+        icon: 'text-green-600',
+        button: 'bg-green-600 hover:bg-green-700',
+        gradient: 'from-green-600 to-green-700 hover:from-green-700 hover:to-green-800',
+        border: 'border-green-200'
+      },
+      cyan: {
+        bg: 'bg-cyan-50',
+        text: 'text-cyan-800',
+        icon: 'text-cyan-600',
+        button: 'bg-cyan-600 hover:bg-cyan-700',
+        gradient: 'from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800',
+        border: 'border-cyan-200'
+      },
+      orange: {
+        bg: 'bg-orange-50',
+        text: 'text-orange-800',
+        icon: 'text-orange-600',
+        button: 'bg-orange-600 hover:bg-orange-700',
+        gradient: 'from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800',
+        border: 'border-orange-200'
+      },
+      yellow: {
+        bg: 'bg-yellow-50',
+        text: 'text-yellow-800',
+        icon: 'text-yellow-600',
+        button: 'bg-yellow-600 hover:bg-yellow-700',
+        gradient: 'from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800',
+        border: 'border-yellow-200'
+      }
+    };
+    return colorMap[colorClass] || colorMap.blue;
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Enhanced CSS */}
+      <style jsx>{`
+        .circuit-pattern {
+          background-image: 
+            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+            linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+          background-size: 30px 30px;
+        }
+        .diagonal-lines {
+          background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(59, 130, 246, 0.05) 10px,
+            rgba(59, 130, 246, 0.05) 20px
+          );
+        }
+        .electric-glow {
+          box-shadow: 
+            0 0 20px rgba(59, 130, 246, 0.3),
+            inset 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+        .power-line {
+          background: linear-gradient(to right, transparent 0%, rgba(59, 130, 246, 0.3) 50%, transparent 100%);
+          height: 2px;
+          animation: power-flow 3s linear infinite;
+        }
+        @keyframes power-flow {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .scroll-indicator {
+          position: fixed;
+          top: 64px;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: linear-gradient(to right, #3b82f6 var(--scroll-progress, 0%), transparent var(--scroll-progress, 0%));
+          z-index: 40;
+        }
+      `}</style>
+
+      {/* Header */}
+      <header className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 shadow-lg border-b-2 border-blue-500/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <Lightbulb className="w-8 h-8 text-blue-600" />
+                <Sparkles className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
+              </div>
+              <div>
+                <span className="text-xl font-bold text-gray-800">KB Switches™</span>
+                <div className="text-xs text-blue-600 font-medium">SMART HOME AUTOMATION</div>
+              </div>
+            </div>
+
+            <nav className="hidden md:flex space-x-8">
+              {['Home', 'Products', 'Features', 'Testimonials', 'Projects', 'Contact'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium relative group"
+                >
+                  {item}
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                </a>
+              ))}
+            </nav>
+
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-gray-700"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+    </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {['Home', 'Products', 'Features', 'Testimonials', 'Projects', 'Contact'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="block px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </header >
+
+  {/* Simplified Hero Section */ }
+  < section id = "home" className = "pt-16 min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden circuit-pattern" >
+    {/* Animated Circuit Lines */ }
+    < div className = "absolute inset-0 opacity-20" >
+          <div className="absolute top-1/4 left-0 w-full power-line"></div>
+          <div className="absolute top-2/4 left-0 w-full power-line" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-3/4 left-0 w-full power-line" style={{ animationDelay: '2s' }}></div>
+        </div >
+
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="text-center max-w-4xl mx-auto">
+      <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+        <Cpu className="w-4 h-4" />
+        <span>Established Since 2019</span>
+      </div>
+
+      <h1 className="text-5xl md:text-7xl font-bold text-gray-800 mb-6 leading-tight">
+        SWITCH TO
+        <span className="text-blue-600 block">SMART LIVING</span>
+      </h1>
+
+      <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+        A Light With New Shine.. Transform your home with India's most reliable WiFi smart switches and automation solutions.
+      </p>
+
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg electric-glow flex items-center justify-center space-x-2">
+          <Phone className="w-5 h-5" />
+          <span>Get Free Quote</span>
+        </button>
+        <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-2">
+          <CircuitBoard className="w-5 h-5" />
+          <span>View Catalog</span>
+        </button>
+      </div>
+
+      {/* Trust Badges */}
+      <div className="flex flex-wrap justify-center gap-4 mb-16">
+        {certifications.map((cert, index) => (
+          <div key={index} className="flex items-center space-x-2 bg-white px-4 py-3 rounded-lg shadow-sm">
+            <div className="text-blue-600">{cert.icon}</div>
+            <span className="text-sm font-medium text-gray-700">{cert.name}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Product Showcase */}
+      <div className="bg-white rounded-2xl shadow-2xl p-8 electric-glow max-w-md mx-auto">
+        <div className="aspect-square bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden">
+          <div className="absolute inset-0 diagonal-lines opacity-10"></div>
+          <div className={getColorClasses(products[activeProduct].colorClass).icon}>
+            {React.cloneElement(products[activeProduct].icon, { className: "w-20 h-20" })}
+          </div>
+        </div>
+        <h3 className="text-xl font-bold text-gray-800 mb-2">{products[activeProduct].name}</h3>
+        <p className="text-gray-600 mb-4">{products[activeProduct].shortDesc}</p>
+        <div className="flex justify-center space-x-2">
+          {products.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveProduct(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${index === activeProduct ? 'w-8 bg-blue-600' : 'w-2 bg-gray-300'
+                }`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+      </section >
+
+  {/* Stats Section */ }
+  < section className = "py-16 bg-white relative" >
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="text-center">
+          <Timer className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+          <div className="text-3xl font-bold text-gray-800 mb-2">5+ Years</div>
+          <div className="text-gray-600">Industry Experience</div>
+        </div>
+        <div className="text-center">
+          <Activity className="w-8 h-8 text-purple-600 mx-auto mb-3" />
+          <div className="text-3xl font-bold text-gray-800 mb-2">1L+</div>
+          <div className="text-gray-600">Switch Cycles</div>
+        </div>
+        <div className="text-center">
+          <MapPin className="w-8 h-8 text-green-600 mx-auto mb-3" />
+          <div className="text-3xl font-bold text-gray-800 mb-2">Pan India</div>
+          <div className="text-gray-600">Distribution</div>
+        </div>
+        <div className="text-center">
+          <Award className="w-8 h-8 text-orange-600 mx-auto mb-3" />
+          <div className="text-3xl font-bold text-gray-800 mb-2">MSME</div>
+          <div className="text-gray-600">Certified</div>
+        </div>
+      </div>
+    </div>
+      </section >
+
+  {/* Features Section */ }
+  < section id = "features" className = "py-20 bg-gray-50 relative" >
+        <div className="absolute inset-0 circuit-pattern opacity-5"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Sparkles className="w-4 h-4" />
+              <span>WHY CHOOSE KB</span>
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Smart Features, Smarter Living</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Experience the perfect blend of innovation, quality, and convenience with our smart home automation solutions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="relative group">
+                <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                  <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-4 rounded-xl w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/5 rounded-full -z-10 group-hover:scale-150 transition-transform duration-500"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Additional Features Banner */}
+          <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white relative overflow-hidden">
+            <div className="absolute inset-0 bg-white/10 diagonal-lines"></div>
+        <div className="relative grid md:grid-cols-3 gap-8 text-center">
+             <div>
+               <Cloud className="w-12 h-12 mx-auto mb-3" />
+               <h4 className="font-semibold text-lg mb-1">Cloud Connected</h4>
+               <p className="text-blue-100">Control from anywhere in the world</p>
+             </div>
+             <div>
+               <Timer className="w-12 h-12 mx-auto mb-3" />
+               <h4 className="font-semibold text-lg mb-1">Schedule & Timer</h4>
+               <p className="text-blue-100">Automate your daily routines</p>
+             </div>
+             <div>
+               <Shield className="w-12 h-12 mx-auto mb-3" />
+               <h4 className="font-semibold text-lg mb-1">Surge Protection</h4>
+               <p className="text-blue-100">Built-in safety for all devices</p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section >
+
+  {/* Improved Products Section */ }
+  < section id = "products" className = "py-20 bg-white" >
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Header */}
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <Zap className="w-4 h-4" />
+          <span>PRODUCT RANGE</span>
+        </div>
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">Smart Solutions for Every Need</h2>
+        <p className="text-xl text-gray-600">Discover the perfect switch for every room and application</p>
+      </div>
+
+      {/* Category Tabs */}
+      <div className="flex justify-center mb-12">
+        <div className="flex bg-gray-100 rounded-lg p-1 shadow-lg">
+          {productCategories.map((category) => (
+            <button
+              key={category.id}
+              className={`flex items-center space-x-2 px-6 py-3 rounded-md font-medium transition-all ${activeCategory === category.id
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'text-gray-600 hover:text-blue-600'
+                }`}
+              onClick={() => setActiveCategory(category.id)}
+            >
+              {category.icon}
+              <span>{category.name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Category Description */}
+      <div className="text-center mb-12">
+        <p className="text-lg text-gray-600">
+          {productCategories.find(cat => cat.id === activeCategory)?.description}
+        </p>
+      </div>
+
+      {/* Products Grid */}
+      <div className="mb-16">
+        {activeCategory === 'switches' ? (
+          // Benefit-focused cards for switches
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {productCategories.find(cat => cat.id === 'switches')?.products.map((product, index) => {
+              const colors = getColorClasses(product.colorClass);
+              const isExpanded = expandedProduct === product.modelNumber;
+
+              return (
+                <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group border border-gray-100">
+                  {/* Product Header */}
+                  <div className={`h-40 ${colors.bg} flex items-center justify-center relative overflow-hidden`}>
+                    <div className="absolute inset-0 circuit-pattern opacity-10"></div>
+                    <div className={`${colors.icon} transform group-hover:scale-110 transition-transform duration-300`}>
+                      {React.cloneElement(product.icon, { className: "w-16 h-16" })}
+                    </div>
+                    <div className="absolute top-4 right-4">
+                      <span className={`bg-white ${colors.text} text-sm font-bold px-3 py-1 rounded-full shadow-sm`}>
+                        {product.modelNumber}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-4 left-4">
+                      <span className="bg-white/90 text-gray-700 text-xs px-2 py-1 rounded-full font-medium">
+                        {product.bestFor}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
+                    <p className="text-gray-600 mb-4">{product.shortDesc}</p>
+
+                    {/* Key Benefits */}
+                    <div className="mb-4">
+                      <p className="text-sm font-semibold text-gray-700 mb-2">Key Benefits:</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {product.benefits?.slice(0, 4).map((benefit, i) => (
+                          <div key={i} className="flex items-center space-x-1">
+                            <CheckCircle className="w-3 h-3 text-green-500 flex-shrink-0" />
+                            <span className="text-xs text-gray-600">{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Expandable Technical Details */}
+                    <div className="border-t border-gray-100 pt-4">
+                      <button
+                        onClick={() => setExpandedProduct(isExpanded ? null : product.modelNumber)}
+                        className="flex items-center justify-between w-full text-sm text-gray-600 hover:text-blue-600 transition-colors"
+                      >
+                        <span>Technical Specifications</span>
+                        <ChevronRight className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                      </button>
+
+                      {isExpanded && (
+                        <div className="mt-3 space-y-2 text-sm">
+                          <div className="flex justify-between">
+                            <span className="text-gray-500">Voltage:</span>
+                            <span className="font-medium">{product.voltage}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-500">Load:</span>
+                            <span className="font-medium">{product.load}</span>
+                          </div>
+                          {product.loadControls && (
+                            <div className="flex justify-between">
+                              <span className="text-gray-500">Controls:</span>
+                              <span className="font-medium">{product.loadControls} Load(s)</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    <button className={`w-full mt-4 bg-gradient-to-r ${colors.gradient} text-white py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 hover:shadow-lg`}>
+                      <Phone className="w-4 h-4" />
+                      <span>Get Quote</span>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          // Simpler cards for other categories
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {productCategories.find(cat => cat.id === activeCategory)?.products.map((product, index) => {
+              const colors = getColorClasses(product.colorClass);
+
+              return (
+                <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-100">
+                  <div className={`h-32 ${colors.bg} flex items-center justify-center relative`}>
+                    <div className={`${colors.icon} group-hover:scale-110 transition-transform duration-300`}>
+                      {React.cloneElement(product.icon, { className: "w-12 h-12" })}
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{product.name}</h3>
+                    <p className="text-gray-600 mb-4">{product.shortDesc}</p>
+
+                    {product.benefits && (
+                      <div className="mb-4">
+                        <div className="flex flex-wrap gap-1">
+                          {product.benefits.slice(0, 3).map((benefit, i) => (
+                            <span key={i} className={`${colors.bg} ${colors.text} text-xs px-2 py-1 rounded-lg font-medium`}>
+                              {benefit}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <button className={`w-full bg-gradient-to-r ${colors.gradient} text-white py-2 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2`}>
+                      <span>Learn More</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Product Features Banner */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white mb-16">
+        <div className="text-center mb-6">
+          <h3 className="text-2xl font-bold mb-2">Every KB Switch Includes</h3>
+          <p className="text-blue-100">Premium features as standard</p>
+        </div>
+        <div className="grid md:grid-cols-4 gap-6 text-center">
+          <div>
+            <Smartphone className="w-8 h-8 mx-auto mb-2" />
+            <h4 className="font-semibold mb-1">Smart Life App</h4>
+            <p className="text-sm text-blue-100">iOS & Android</p>
+          </div>
+          <div>
+            <Mic className="w-8 h-8 mx-auto mb-2" />
+            <h4 className="font-semibold mb-1">Voice Control</h4>
+            <p className="text-sm text-blue-100">Alexa & Google</p>
+          </div>
+          <div>
+            <Wifi className="w-8 h-8 mx-auto mb-2" />
+            <h4 className="font-semibold mb-1">WiFi 2.4GHz</h4>
+            <p className="text-sm text-blue-100">Stable Connection</p>
+          </div>
+          <div>
+            <Shield className="w-8 h-8 mx-auto mb-2" />
+            <h4 className="font-semibold mb-1">1 Lakh Cycles</h4>
+            <p className="text-sm text-blue-100">Tested Durability</p>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Banner */}
+      <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 text-white text-center">
+        <h3 className="text-2xl font-bold mb-4">Need Bulk Quantities or Custom Solutions?</h3>
+        <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+          Special pricing for builders, architects, and large projects. Get dedicated support from our B2B team.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center space-x-2">
+            <Building className="w-5 h-5" />
+            <span>B2B Inquiries</span>
+          </button>
+          <button className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-6 py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center justify-center space-x-2">
+            <Truck className="w-5 h-5" />
+            <span>Dealer Program</span>
+          </button>
+        </div>
+      </div>
+    </div>
+     </section >
+
+  {/* Testimonials Section (replacing Gallery) */ }
+  < section id = "testimonials" className = "py-20 bg-gray-50 relative overflow-hidden" >
+       <div className="absolute inset-0 circuit-pattern opacity-5"></div>
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+         <div className="text-center mb-16">
+           <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+             <ThumbsUp className="w-4 h-4" />
+             <span>CUSTOMER REVIEWS</span>
+           </div>
+           <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Customers Say</h2>
+           <p className="text-xl text-gray-600">Real experiences from satisfied customers across India</p>
+         </div>
+
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+           {testimonials.map((testimonial) => (
+             <div key={testimonial.id} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100">
+               <div className="flex items-center mb-4">
+                 <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                   {testimonial.avatar}
+                 </div>
+                 <div>
+                   <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                   <p className="text-sm text-gray-500">{testimonial.location}</p>
+                 </div>
+                 <div className="ml-auto">
+                   <div className="flex items-center space-x-1">
+                     {[...Array(testimonial.rating)].map((_, i) => (
+                       <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                     ))}
+                   </div>
+                 </div>
+               </div>
+               
+               <div className="relative mb-4">
+                 <Quote className="w-8 h-8 text-blue-200 absolute -top-2 -left-2" />
+                 <p className="text-gray-700 italic pl-6">{testimonial.text}</p>
+               </div>
+               
+               <div className="flex items-center justify-between text-sm">
+                 <span className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full font-medium">
+                   {testimonial.project}
+                 </span>
+                 <span className="text-gray-500">Verified Purchase</span>
+               </div>
+             </div>
+           ))}
+         </div>
+
+         <div className="text-center mt-12">
+           <div className="bg-white rounded-xl p-6 shadow-lg inline-block">
+             <div className="flex items-center justify-center space-x-6 text-center">
+               <div>
+                 <div className="text-3xl font-bold text-blue-600">4.8/5</div>
+                 <div className="text-sm text-gray-500">Average Rating</div>
+               </div>
+               <div className="h-12 w-px bg-gray-200"></div>
+               <div>
+                 <div className="text-3xl font-bold text-green-600">500+</div>
+                 <div className="text-sm text-gray-500">Happy Customers</div>
+               </div>
+               <div className="h-12 w-px bg-gray-200"></div>
+               <div>
+                 <div className="text-3xl font-bold text-purple-600">98%</div>
+                 <div className="text-sm text-gray-500">Satisfaction Rate</div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section >
+
+  {/* Case Studies Section (replacing Videos) */ }
+  < section id = "projects" className = "py-20 bg-white" >
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center space-x-2 bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+          <Building className="w-4 h-4" />
+          <span>SUCCESS STORIES</span>
+        </div>
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">Real Projects, Real Results</h2>
+        <p className="text-xl text-gray-600">See how KB Switches transformed homes and businesses</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {caseStudies.map((study) => (
+          <div key={study.id} className="group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
+            <div className="aspect-video bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center relative">
+              <div className="absolute inset-0 diagonal-lines opacity-10"></div>
+              <Building className="w-16 h-16 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
+              <div className="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full">
+                <span className="text-sm font-medium text-gray-700">{study.location}</span>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <h3 className="font-bold text-gray-900 mb-2">{study.title}</h3>
+              <p className="text-gray-600 mb-4">{study.description}</p>
+
+              <div className="space-y-2 mb-4">
+                <div className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
+                  <span className="text-sm text-gray-500">Scope:</span>
+                  <span className="text-sm font-medium text-gray-800">{study.scope}</span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
+                  <span className="text-sm text-gray-500">Result:</span>
+                  <span className="text-sm font-medium text-green-700">{study.savings}</span>
+                </div>
+              </div>
+
+              <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2">
+                <span>View Case Study</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center mt-12">
+        <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2 mx-auto">
+          <Building className="w-4 h-4" />
+          <span>View All Projects</span>
+        </button>
+      </div>
+    </div>
+     </section >
+
+  {/* Improved Contact Section */ }
+  < section id = "contact" className = "py-20 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden" >
+       <div className="absolute inset-0 circuit-pattern opacity-5"></div>
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+         <div className="text-center mb-16">
+           <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+             <Phone className="w-4 h-4" />
+             <span>GET IN TOUCH</span>
+           </div>
+           <h2 className="text-4xl font-bold text-gray-900 mb-4">Ready to Switch to Smart?</h2>
+           <p className="text-xl text-gray-600">Contact us for quotations, bulk orders, and dealership inquiries</p>
+         </div>
+
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+           {/* Contact Information */}
+           <div className="space-y-8">
+             <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+               <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
+                 <MapPin className="w-6 h-6 text-blue-600" />
+                 <span>Visit Our Office</span>
+               </h3>
+               <div className="space-y-4">
+                 <div>
+                   <p className="text-gray-700 mb-2 leading-relaxed">
+                     A-183 Ambica Industrial-2, Near Olive Circle,<br />
+                     Gandhi Kutir Road, Bhattar, Surat - 395017
+                   </p>
+                 </div>
+                 <div className="pt-4 border-t border-gray-200">
+                   <p className="text-sm font-semibold text-gray-700 mb-2">Business Hours:</p>
+                   <p className="text-gray-600">Monday - Saturday: 9:00 AM - 7:00 PM</p>
+                   <p className="text-gray-600">Sunday: Closed</p>
+                 </div>
+               </div>
+             </div>
+
+             <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+               <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
+                 <Phone className="w-6 h-6 text-blue-600" />
+                 <span>Quick Contact</span>
+               </h3>
+               <div className="space-y-4">
+                 <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-100">
+                   <span className="text-gray-700 font-medium">Customer Care</span>
+                   <a href="tel:7990414919" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">7990414919</a>
+                 </div>
+                 <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-100">
+                   <span className="text-gray-700 font-medium">Business Inquiries</span>
+                   <a href="tel:9687637511" className="font-bold text-green-600 hover:text-green-700 transition-colors">9687637511</a>
+                 </div>
+                 <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg border border-purple-100">
+                   <span className="text-gray-700 font-medium">Email</span>
+                   <a href="mailto:kblights29@gmail.com" className="font-bold text-purple-600 hover:text-purple-700 transition-colors break-all">kblights29@gmail.com</a>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+           {/* Contact Form */}
+           <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+             <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
+             <form className="space-y-6">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                 <div>
+                   <label className="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
+                   <input
+                     type="text"
+                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                     placeholder="Your Name"
+                   />
+                 </div>
+                 <div>
+                   <label className="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
+                   <input
+                     type="tel"
+                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                     placeholder="Your Phone"
+                   />
+                 </div>
+               </div>
+               <div>
+                 <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                 <input
+                   type="email"
+                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                   placeholder="your@email.com"
+                 />
+               </div>
+               <div>
+                 <label className="block text-sm font-semibold text-gray-700 mb-2">Product Interest</label>
+                 <select className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                   <option value="">Select Product Category</option>
+                   <option value="switches">Smart Switches</option>
+                   <option value="lights">Smart Lighting</option>
+                   <option value="automation">Home Automation</option>
+                   <option value="bulk">Bulk/Dealership Inquiry</option>
+                 </select>
+               </div>
+               <div>
+                 <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                 <textarea
+                   rows="4"
+                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                   placeholder="Tell us about your requirements..."
+                 ></textarea>
+               </div>
+               <button
+                 type="submit"
+                 className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
+               >
+                 <Mail className="w-5 h-5" />
+                 <span>Send Message</span>
+               </button>
+             </form>
+           </div>
+         </div>
+
+         {/* Dealer Network CTA */}
+         <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-center text-white shadow-xl">
+           <h3 className="text-2xl font-bold mb-4">Become a KB Switches Dealer</h3>
+           <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+             Join our growing network of dealers across India. Attractive margins, marketing support, and exclusive territories available.
+           </p>
+           <button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 inline-flex items-center space-x-2 shadow-lg">
+             <Users className="w-5 h-5" />
+             <span>Partner With Us</span>
+           </button>
+         </div>
+       </div>
+     </section >
+
+  {/* Footer */ }
+  < footer className = "bg-gray-900 text-white py-12 border-t border-gray-800" >
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="relative">
+              <Lightbulb className="w-8 h-8 text-blue-400" />
+              <Sparkles className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
+            </div>
+            <div>
+              <span className="text-xl font-bold">KB Switches™</span>
+              <div className="text-xs text-blue-400">SMART HOME AUTOMATION</div>
+            </div>
+          </div>
+          <p className="text-gray-400 text-sm">A Light With New Shine..</p>
+          <p className="text-gray-400 text-sm mt-2">Making Indian homes smarter since 2019</p>
+        </div>
+
+        <div>
+          <h4 className="font-semibold mb-4">Quick Links</h4>
+          <ul className="space-y-2 text-sm text-gray-400">
+            <li><a href="#products" className="hover:text-blue-400 transition-colors">Products</a></li>
+            <li><a href="#" className="hover:text-blue-400 transition-colors">Download Catalog</a></li>
+            <li><a href="#" className="hover:text-blue-400 transition-colors">Installation Guide</a></li>
+            <li><a href="#" className="hover:text-blue-400 transition-colors">Warranty</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-semibold mb-4">Support</h4>
+          <ul className="space-y-2 text-sm text-gray-400">
+            <li><a href="#" className="hover:text-blue-400 transition-colors">Customer Care</a></li>
+            <li><a href="#" className="hover:text-blue-400 transition-colors">Dealer Locator</a></li>
+            <li><a href="#" className="hover:text-blue-400 transition-colors">Service Centers</a></li>
+            <li><a href="#" className="hover:text-blue-400 transition-colors">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-semibold mb-4">Certifications</h4>
+          <div className="grid grid-cols-2 gap-2">
+            {certifications.map((cert, index) => (
+              <div key={index} className="flex items-center space-x-1 text-sm text-gray-400">
+                <div className="text-blue-400">{cert.icon}</div>
+                <span>{cert.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+        <p>&copy; 2024 B.R. ENTERPRISE. All rights reserved. | KB Switches is a registered trademark.</p>
+      </div>
+    </div>
+     </footer >
+
+  {/* Scroll to Top Button */ }
+{
+  showScrollTop && (
+    <button
+      onClick={scrollToTop}
+      className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40 electric-glow"
+    >
+      <ArrowUp className="w-6 h-6" />
+    </button>
+  )
+}
+
+{/* WhatsApp Button */ }
+<a
+        href="https://wa.me/917990414919"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-24 right-8 bg-green-500 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40"
+      >
+        <MessageSquare className="w-6 h-6" />
+      </a>
+   </div >
+ );
+};
+
+export default App;
