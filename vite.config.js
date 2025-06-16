@@ -6,4 +6,8 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss(),
   ],
+  base: '/kb-switches-site/', // Your repository name
+  build: {
+    outDir: 'dist',
+  },
 })

@@ -39,6 +39,7 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeProduct, setActiveProduct] = useState(0);
+  const [activeCategory, setActiveCategory] = useState('switches');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +59,167 @@ const App = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Update your product data structure based on JSON
+  const productCategories = [
+    {
+      id: 'switches',
+      name: 'Smart Switches',
+      icon: <Zap className="w-5 h-5" />,
+      description: 'From basic lighting to heavy-duty appliances - we\'ve got you covered',
+      products: [
+        {
+          modelNumber: "KB 001",
+          name: "4 Touch Switch",
+          description: "WiFi Smart Touch Switch with 4 individual load controls",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "450W incandescent, 120W LED",
+          loadControls: "4",
+          applications: ["LED lights", "Ceiling lights", "charging cable", "T.V", "Computers"],
+          icon: <Zap className="w-6 h-6" />,
+          colorClass: "blue",
+          type: "switch"
+        },
+        {
+          modelNumber: "KB 002",
+          name: "15A Switch",
+          description: "High capacity WiFi Smart Touch Switch for heavy appliances",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "2000W",
+          loadControls: "2",
+          applications: ["A.C (up to 2 Ton)", "Refrigerator", "Microwave", "Oven", "Iron", "Flour mill"],
+          icon: <Power className="w-6 h-6" />,
+          colorClass: "purple",
+          type: "switch"
+        },
+        {
+          modelNumber: "KB 003",
+          name: "24A Switch",
+          description: "Maximum capacity switch for industrial applications",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "3500W",
+          loadControls: "1",
+          applications: ["Geyser", "Room heater", "large Oven", "2hp motor", "A.C (up to 3 Ton)"],
+          icon: <Gauge className="w-6 h-6" />,
+          colorClass: "red",
+          type: "switch"
+        },
+        {
+          modelNumber: "KB 004",
+          name: "2 Way Switch",
+          description: "Perfect for staircase and parking area lighting",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "450W",
+          loadControls: "2",
+          applications: ["Staircase lights", "Parking area light"],
+          icon: <Activity className="w-6 h-6" />,
+          colorClass: "green",
+          type: "switch"
+        },
+        {
+          modelNumber: "KB 005",
+          name: "Fan Regulator",
+          description: "Humming-free 5-step speed control for ceiling fans",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "100W Capacitor based",
+          features: "Humming Free, 5-step fan coil speed output",
+          applications: ["Ceiling Fan"],
+          icon: <Settings className="w-6 h-6" />,
+          colorClass: "cyan",
+          type: "switch"
+        },
+        {
+          modelNumber: "KB 006",
+          name: "Bell Switch",
+          description: "Smart bell control for homes and offices",
+          voltage: "110-250 VAC, 50/60Hz",
+          load: "120W",
+          applications: ["Outdoor bell", "Office bell"],
+          icon: <Home className="w-6 h-6" />,
+          colorClass: "orange",
+          type: "switch"
+        }
+      ]
+    },
+    {
+      id: 'lights',
+      name: 'Smart Lights',
+      icon: <Lightbulb className="w-5 h-5" />,
+      description: 'T5 tubes, bulbs, and sensor lights for complete illumination',
+      products: [
+        // You can add your lighting products here
+        {
+          name: "LED T5 Tube",
+          description: "Energy efficient T5 tube lights",
+          applications: ["Offices", "Shops", "Warehouses"],
+          icon: <Lightbulb className="w-6 h-6" />,
+          colorClass: "yellow"
+        },
+        {
+          name: "Smart Bulbs",
+          description: "WiFi controlled smart bulbs with dimming",
+          applications: ["Living rooms", "Bedrooms", "Study rooms"],
+          icon: <Lightbulb className="w-6 h-6" />,
+          colorClass: "yellow"
+        },
+        {
+          name: "Sensor Lights",
+          description: "Motion activated sensor lights",
+          applications: ["Corridors", "Bathrooms", "Outdoor areas"],
+          icon: <Camera className="w-6 h-6" />,
+          colorClass: "yellow"
+        }
+      ]
+    },
+    {
+      id: 'automation',
+      name: 'Home Automation',
+      icon: <Cpu className="w-5 h-5" />,
+      description: 'Complete automation solutions for modern homes',
+      products: [
+        {
+          name: "Hotel Switches",
+          description: "Specialty switches for hospitality industry",
+          variants: ["Do not Disturb", "Clean Room"],
+          applications: ["Hotels", "Resorts", "Guest houses"],
+          icon: <Settings className="w-6 h-6" />,
+          colorClass: "purple"
+        }
+        // Add more automation products
+      ]
+    }
+  ];
+
+  // Smart bundles data
+  const smartBundles = [
+    {
+      name: "Starter Kit",
+      price: "₹12,999",
+      originalPrice: "₹14,999",
+      includes: ["2x Touch Switches", "1x Smart Lock", "1x Motion Sensor"],
+      savings: "Save ₹2,000",
+      icon: <Home className="w-8 h-8" />,
+      popular: false
+    },
+    {
+      name: "Complete Home Kit",
+      price: "₹45,999",
+      originalPrice: "₹53,999",
+      includes: ["6x Various Switches", "3x Smart Locks", "4x Sensors", "Free Installation"],
+      savings: "Save ₹8,000",
+      icon: <Cpu className="w-8 h-8" />,
+      popular: true
+    },
+    {
+      name: "Security Focus Kit",
+      price: "₹28,999",
+      originalPrice: "₹31,999",
+      includes: ["4x Smart Locks", "2x Motion Sensors", "2x Touch Switches"],
+      savings: "Save ₹3,000",
+      icon: <Shield className="w-8 h-8" />,
+      popular: false
+    }
+  ];
 
   const products = [
     {
@@ -301,14 +463,14 @@ const App = () => {
               ))}
             </nav>
 
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-700"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden text-gray-700"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
-    </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
@@ -479,78 +641,189 @@ const App = () => {
         </div>
       </section>
 
-      {/* Products Section */}
+
+
+      {/* // Completely revamped section */}
       <section id="products" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
           <div className="text-center mb-16">
             <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
               <Zap className="w-4 h-4" />
               <span>PRODUCT RANGE</span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Smart Switches for Every Need</h2>
-            <p className="text-xl text-gray-600">From basic lighting to heavy-duty appliances - we've got you covered</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Smart Solutions for Every Need</h2>
+            <p className="text-xl text-gray-600">Comprehensive range of switches, lights, and automation solutions</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product, index) => {
-              const colors = getColorClasses(product.colorClass);
-              return (
-                <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
-                  <div className="h-48 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 circuit-pattern opacity-10"></div>
-                    <div className={`${colors.icon} transform group-hover:scale-110 transition-transform duration-300`}>
-                      {React.cloneElement(product.icon, { className: "w-16 h-16" })}
-                    </div>
-                    <div className="absolute top-4 right-4">
-                      <span className={`${colors.bg} ${colors.text} text-sm font-medium px-3 py-1 rounded-full`}>
-                        {product.modelNumber}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{product.name}</h3>
-                    <p className="text-gray-600 mb-4">{product.description}</p>
+          {/* Simple Tabs */}
+          <div className="flex justify-center mb-8">
+            <div className="flex bg-white rounded-lg p-1 shadow-lg">
+              {productCategories.map((category) => (
+                <button
+                  key={category.id}
+                  className={`flex items-center space-x-2 px-6 py-3 rounded-md font-medium transition-all ${activeCategory === category.id
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-600 hover:text-blue-600'
+                    }`}
+                  onClick={() => setActiveCategory(category.id)}
+                >
+                  {category.icon}
+                  <span>{category.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
 
-                    <div className="space-y-3 mb-4">
-                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex items-center space-x-2">
-                          <Zap className="w-4 h-4 text-yellow-500" />
-                          <span className="text-sm text-gray-600">Voltage</span>
-                        </div>
-                        <span className="text-sm font-semibold text-gray-800">{product.voltage}</span>
-                      </div>
-                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex items-center space-x-2">
-                          <Gauge className="w-4 h-4 text-red-500" />
-                          <span className="text-sm text-gray-600">Load</span>
-                        </div>
-                        <span className="text-sm font-semibold text-gray-800">{product.load}</span>
-                      </div>
-                    </div>
+          {/* Category Description */}
+          <div className="text-center mb-8">
+            <p className="text-lg text-gray-600">
+              {productCategories.find(cat => cat.id === activeCategory)?.description}
+            </p>
+          </div>
 
-                    <div className="mb-4">
-                      <p className="text-sm text-gray-500 mb-2 font-medium">Perfect for:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {product.applications.map((app, i) => (
-                          <span key={i} className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-lg font-medium">
-                            {app}
+          {/* Products Grid - Different layouts for different categories */}
+          <div className="mb-16">
+            {activeCategory === 'switches' ? (
+              // Detailed cards for switches (your main products)
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {productCategories.find(cat => cat.id === 'switches')?.products.map((product, index) => {
+                  const colors = getColorClasses(product.colorClass);
+                  return (
+                    <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group">
+                      <div className="h-48 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 circuit-pattern opacity-10"></div>
+                        <div className={`${colors.icon} transform group-hover:scale-110 transition-transform duration-300`}>
+                          {React.cloneElement(product.icon, { className: "w-16 h-16" })}
+                        </div>
+                        <div className="absolute top-4 right-4">
+                          <span className={`${colors.bg} ${colors.text} text-sm font-medium px-3 py-1 rounded-full`}>
+                            {product.modelNumber}
                           </span>
-                        ))}
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">{product.name}</h3>
+                        <p className="text-gray-600 mb-4">{product.description}</p>
+
+                        {/* Technical Specs */}
+                        <div className="space-y-3 mb-4">
+                          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div className="flex items-center space-x-2">
+                              <Zap className="w-4 h-4 text-yellow-500" />
+                              <span className="text-sm text-gray-600">Voltage</span>
+                            </div>
+                            <span className="text-sm font-semibold text-gray-800">{product.voltage}</span>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div className="flex items-center space-x-2">
+                              <Gauge className="w-4 h-4 text-red-500" />
+                              <span className="text-sm text-gray-600">Load</span>
+                            </div>
+                            <span className="text-sm font-semibold text-gray-800">{product.load}</span>
+                          </div>
+                          {product.loadControls && (
+                            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                              <div className="flex items-center space-x-2">
+                                <Settings className="w-4 h-4 text-blue-500" />
+                                <span className="text-sm text-gray-600">Controls</span>
+                              </div>
+                              <span className="text-sm font-semibold text-gray-800">{product.loadControls} Load(s)</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Applications */}
+                        <div className="mb-4">
+                          <p className="text-sm text-gray-500 mb-2 font-medium">Perfect for:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {product.applications?.map((app, i) => (
+                              <span key={i} className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-lg font-medium">
+                                {app}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        <button className={`w-full bg-gradient-to-r ${colors.gradient} text-white py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2`}>
+                          <Phone className="w-4 h-4" />
+                          <span>Get Quote</span>
+                        </button>
                       </div>
                     </div>
+                  );
+                })}
+              </div>
+            ) : (
+              // Simpler cards for lights and automation (since you have multiple photos)
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {productCategories.find(cat => cat.id === activeCategory)?.products.map((product, index) => (
+                  <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                    <div className="h-40 bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center relative">
+                      <div className="text-yellow-600 group-hover:scale-110 transition-transform duration-300">
+                        {React.cloneElement(product.icon, { className: "w-12 h-12" })}
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">{product.name}</h3>
+                      <p className="text-gray-600 mb-4">{product.description}</p>
 
-                    <button className={`w-full bg-gradient-to-r ${colors.gradient} text-white py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2`}>
-                      <Phone className="w-4 h-4" />
-                      <span>Get Quote</span>
-                    </button>
+                      {product.variants && (
+                        <div className="mb-4">
+                          <p className="text-sm text-gray-500 mb-2">Variants:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {product.variants.map((variant, i) => (
+                              <span key={i} className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded font-medium">
+                                {variant}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <button className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2">
+                        <span>View Products</span>
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Key Features Banner */}
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white mb-16">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold mb-2">Why Choose KB Switches?</h3>
+              <p className="text-blue-100">Advanced features that make the difference</p>
+            </div>
+            <div className="grid md:grid-cols-4 gap-6 text-center">
+              <div>
+                <Smartphone className="w-8 h-8 mx-auto mb-2" />
+                <h4 className="font-semibold mb-1">Smart Life App</h4>
+                <p className="text-sm text-blue-100">Android/iOS Control</p>
+              </div>
+              <div>
+                <Mic className="w-8 h-8 mx-auto mb-2" />
+                <h4 className="font-semibold mb-1">Voice Control</h4>
+                <p className="text-sm text-blue-100">Alexa & Google</p>
+              </div>
+              <div>
+                <Wifi className="w-8 h-8 mx-auto mb-2" />
+                <h4 className="font-semibold mb-1">WiFi 2.4GHz</h4>
+                <p className="text-sm text-blue-100">Reliable Connection</p>
+              </div>
+              <div>
+                <Shield className="w-8 h-8 mx-auto mb-2" />
+                <h4 className="font-semibold mb-1">1 Lakh Cycles</h4>
+                <p className="text-sm text-blue-100">Tested Durability</p>
+              </div>
+            </div>
           </div>
 
           {/* CTA Banner */}
-          <div className="mt-16 bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 text-white text-center">
+          <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 text-white text-center">
             <h3 className="text-2xl font-bold mb-4">Need Custom Solutions?</h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
               We provide tailored smart home automation solutions for builders, architects, and large projects
@@ -562,372 +835,287 @@ const App = () => {
         </div>
       </section>
 
-      {/* Locks Section */}
-      <section id="locks" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {/* Gallery Section */}
+      < section id="gallery" className="py-20 bg-white relative overflow-hidden" >
+        <div className="absolute inset-0 circuit-pattern opacity-5"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center space-x-2 bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              <Lock className="w-4 h-4" />
-              <span>SMART SECURITY</span>
+            <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Calendar className="w-4 h-4" />
+              <span>EVENTS & EXHIBITIONS</span>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Advanced Smart Locks</h2>
-            <p className="text-xl text-gray-600">Secure your home with cutting-edge biometric and app-controlled locks</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Journey in Pictures</h2>
+            <p className="text-xl text-gray-600">Moments from trade shows, installations, and industry events</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {lockProducts.map((lock) => (
-              <div key={lock.id} className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div className="aspect-square bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center relative">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {eventPhotos.slice(0, 12).map((photo) => (
+              <div key={photo.id} className="group relative aspect-square bg-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                <div className="w-full h-full bg-gradient-to-br from-orange-100 to-yellow-100 flex items-center justify-center">
+                  <Calendar className="w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <div className="text-white">
+                    <p className="font-semibold">{photo.title}</p>
+                    <p className="text-sm text-gray-200">View Details</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <button className="border-2 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-all duration-300">
+              View All Photos
+            </button>
+          </div>
+        </div>
+      </section >
+
+      {/* Videos Section */}
+      < section id="videos" className="py-20 bg-gray-50" >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center space-x-2 bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Play className="w-4 h-4" />
+              <span>VIDEO LIBRARY</span>
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">See Our Products in Action</h2>
+            <p className="text-xl text-gray-600">Installation guides, product demos, and customer testimonials</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {videos.slice(0, 6).map((video) => (
+              <div key={video.id} className="group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+                <div className="aspect-video bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center relative">
                   <div className="absolute inset-0 diagonal-lines opacity-10"></div>
-                  <Lock className="w-12 h-12 text-purple-600 group-hover:scale-110 transition-transform duration-300" />
-                  <div className="absolute top-2 right-2">
-                    <Shield className="w-5 h-5 text-green-500" />
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Play className="w-8 h-8 text-red-600 ml-1" />
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-gray-900">{lock.name}</h3>
-                  <p className="text-sm text-gray-500">Fingerprint + App Control</p>
+                  <h3 className="font-semibold text-gray-900">{video.title}</h3>
+                  <p className="text-sm text-gray-500 mt-1">Duration: 3:45</p>
                   <div className="mt-3 flex items-center justify-between">
-                    <span className="text-purple-600 font-semibold text-sm">View Details</span>
-                    <ChevronRight className="w-4 h-4 text-purple-600 group-hover:translate-x-1 transition-transform duration-300" />
+                    <span className="text-red-600 font-semibold text-sm">Watch Now</span>
+                    <ChevronRight className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform duration-300" />
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-     </section >
 
-  {/* Sensors Section */ }
-  < section id = "sensors" className = "py-20 bg-gray-50" >
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-          <Activity className="w-4 h-4" />
-          <span>SMART SENSING</span>
+          <div className="text-center mt-12">
+            <button className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-8 py-3 rounded-lg font-medium hover:from-red-700 hover:to-orange-700 transition-all duration-300 flex items-center justify-center space-x-2 mx-auto">
+              <Play className="w-4 h-4" />
+              <span>View All Videos</span>
+            </button>
+          </div>
         </div>
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">Intelligent Sensors & Automation</h2>
-        <p className="text-xl text-gray-600">Motion sensors, stair lighting kits, and environmental monitoring</p>
-      </div>
+      </section >
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {sensorProducts.map((sensor) => (
-          <div key={sensor.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
-            <div className="h-48 bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center relative">
-              <div className="absolute inset-0 circuit-pattern opacity-10"></div>
-              <div className="flex space-x-3">
-                <Camera className="w-10 h-10 text-green-600 group-hover:animate-pulse" />
-                <Thermometer className="w-10 h-10 text-blue-600 group-hover:animate-pulse animation-delay-200" />
+      {/* Contact Section */}
+      < section id="contact" className="py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white relative overflow-hidden" >
+        <div className="absolute inset-0 circuit-pattern opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center space-x-2 bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
+              <Phone className="w-4 h-4" />
+              <span>GET IN TOUCH</span>
+            </div>
+            <h2 className="text-4xl font-bold mb-4">Ready to Switch to Smart?</h2>
+            <p className="text-xl text-gray-300">Contact us for quotations, bulk orders, and dealership inquiries</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="space-y-8">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold mb-6 flex items-center space-x-2">
+                  <MapPin className="w-5 h-5 text-blue-400" />
+                  <span>Visit Our Office</span>
+                </h3>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-gray-300 mb-2">
+                      A-183 Ambica Industrial-2, Near Olive Circle,<br />
+                      Gandhi Kutir Road, Bhattar, Surat - 395017
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-white/20">
+                    <p className="text-sm text-gray-400 mb-2">Business Hours:</p>
+                    <p className="text-gray-300">Monday - Saturday: 9:00 AM - 7:00 PM</p>
+                    <p className="text-gray-300">Sunday: Closed</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold mb-6 flex items-center space-x-2">
+                  <Phone className="w-5 h-5 text-blue-400" />
+                  <span>Quick Contact</span>
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                    <span className="text-gray-300">Customer Care</span>
+                    <a href="tel:7990414919" className="font-semibold hover:text-blue-400 transition-colors">7990414919</a>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                    <span className="text-gray-300">Business Inquiries</span>
+                    <a href="tel:9687637511" className="font-semibold hover:text-blue-400 transition-colors">9687637511</a>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                    <span className="text-gray-300">Email</span>
+                    <a href="mailto:kblights29@gmail.com" className="font-semibold hover:text-blue-400 transition-colors">kblights29@gmail.com</a>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{sensor.name}</h3>
-              <p className="text-gray-600 mb-4">Advanced motion detection and automated control</p>
-              <div className="space-y-2 mb-4">
-                <div className="flex items-center space-x-2 text-sm">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-gray-700">PIR Motion Detection</span>
+
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+              <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Name *</label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Your Name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Phone *</label>
+                    <input
+                      type="tel"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Your Phone"
+                    />
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2 text-sm">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-gray-700">Auto On/Off Control</span>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <input
+                    type="email"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="your@email.com"
+                  />
                 </div>
-                <div className="flex items-center space-x-2 text-sm">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="text-gray-700">Energy Saving Mode</span>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Product Interest</label>
+                  <select className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="" className="bg-gray-800">Select Product Category</option>
+                    <option value="switches" className="bg-gray-800">Smart Switches</option>
+                    <option value="locks" className="bg-gray-800">Smart Locks</option>
+                    <option value="sensors" className="bg-gray-800">Sensors & Automation</option>
+                    <option value="bulk" className="bg-gray-800">Bulk/Dealership Inquiry</option>
+                  </select>
                 </div>
-              </div>
-              <button className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-green-700 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2">
-                <Activity className="w-4 h-4" />
-                <span>Learn More</span>
-              </button>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Message</label>
+                  <textarea
+                    rows="4"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Tell us about your requirements..."
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Send Message</span>
+                </button>
+              </form>
             </div>
           </div>
-        ))}
-      </div>
-    </div>
-     </section >
 
-  {/* Gallery Section */ }
-  < section id = "gallery" className = "py-20 bg-white relative overflow-hidden" >
-       <div className="absolute inset-0 circuit-pattern opacity-5"></div>
-       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-         <div className="text-center mb-16">
-           <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-             <Calendar className="w-4 h-4" />
-             <span>EVENTS & EXHIBITIONS</span>
-           </div>
-           <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Journey in Pictures</h2>
-           <p className="text-xl text-gray-600">Moments from trade shows, installations, and industry events</p>
-         </div>
-
-         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-           {eventPhotos.slice(0, 12).map((photo) => (
-             <div key={photo.id} className="group relative aspect-square bg-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
-               <div className="w-full h-full bg-gradient-to-br from-orange-100 to-yellow-100 flex items-center justify-center">
-                 <Calendar className="w-8 h-8 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
-               </div>
-               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                 <div className="text-white">
-                   <p className="font-semibold">{photo.title}</p>
-                   <p className="text-sm text-gray-200">View Details</p>
-                 </div>
-               </div>
-             </div>
-           ))}
-         </div>
-
-         <div className="text-center mt-12">
-           <button className="border-2 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-all duration-300">
-             View All Photos
-           </button>
-         </div>
-       </div>
-     </section >
-
-  {/* Videos Section */ }
-  < section id = "videos" className = "py-20 bg-gray-50" >
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center space-x-2 bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-          <Play className="w-4 h-4" />
-          <span>VIDEO LIBRARY</span>
-        </div>
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">See Our Products in Action</h2>
-        <p className="text-xl text-gray-600">Installation guides, product demos, and customer testimonials</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {videos.slice(0, 6).map((video) => (
-          <div key={video.id} className="group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
-            <div className="aspect-video bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center relative">
-              <div className="absolute inset-0 diagonal-lines opacity-10"></div>
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <Play className="w-8 h-8 text-red-600 ml-1" />
-              </div>
-            </div>
-            <div className="p-4">
-              <h3 className="font-semibold text-gray-900">{video.title}</h3>
-              <p className="text-sm text-gray-500 mt-1">Duration: 3:45</p>
-              <div className="mt-3 flex items-center justify-between">
-                <span className="text-red-600 font-semibold text-sm">Watch Now</span>
-                <ChevronRight className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform duration-300" />
-              </div>
-            </div>
+          {/* Dealer Network CTA */}
+          <div className="mt-16 bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/20">
+            <h3 className="text-2xl font-bold mb-4">Become a KB Switches Dealer</h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              Join our growing network of dealers across India. Attractive margins, marketing support, and exclusive territories available.
+            </p>
+            <button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 inline-flex items-center space-x-2">
+              <Users className="w-5 h-5" />
+              <span>Partner With Us</span>
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      </section >
 
-      <div className="text-center mt-12">
-        <button className="bg-gradient-to-r from-red-600 to-orange-600 text-white px-8 py-3 rounded-lg font-medium hover:from-red-700 hover:to-orange-700 transition-all duration-300 flex items-center justify-center space-x-2 mx-auto">
-          <Play className="w-4 h-4" />
-          <span>View All Videos</span>
-        </button>
-      </div>
-    </div>
-     </section >
-
-  {/* Contact Section */ }
-  < section id = "contact" className = "py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white relative overflow-hidden" >
-       <div className="absolute inset-0 circuit-pattern opacity-10"></div>
-       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-         <div className="text-center mb-16">
-           <div className="inline-flex items-center space-x-2 bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
-             <Phone className="w-4 h-4" />
-             <span>GET IN TOUCH</span>
-           </div>
-           <h2 className="text-4xl font-bold mb-4">Ready to Switch to Smart?</h2>
-           <p className="text-xl text-gray-300">Contact us for quotations, bulk orders, and dealership inquiries</p>
-         </div>
-
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-           <div className="space-y-8">
-             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-               <h3 className="text-xl font-semibold mb-6 flex items-center space-x-2">
-                 <MapPin className="w-5 h-5 text-blue-400" />
-                 <span>Visit Our Office</span>
-               </h3>
-               <div className="space-y-4">
-                 <div>
-                   <p className="text-gray-300 mb-2">
-                     A-183 Ambica Industrial-2, Near Olive Circle,<br />
-                     Gandhi Kutir Road, Bhattar, Surat - 395017
-                   </p>
-                 </div>
-                 <div className="pt-4 border-t border-white/20">
-                   <p className="text-sm text-gray-400 mb-2">Business Hours:</p>
-                   <p className="text-gray-300">Monday - Saturday: 9:00 AM - 7:00 PM</p>
-                   <p className="text-gray-300">Sunday: Closed</p>
-                 </div>
-               </div>
-             </div>
-
-             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-               <h3 className="text-xl font-semibold mb-6 flex items-center space-x-2">
-                 <Phone className="w-5 h-5 text-blue-400" />
-                 <span>Quick Contact</span>
-               </h3>
-               <div className="space-y-4">
-                 <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                   <span className="text-gray-300">Customer Care</span>
-                   <a href="tel:7990414919" className="font-semibold hover:text-blue-400 transition-colors">7990414919</a>
-                 </div>
-                 <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                   <span className="text-gray-300">Business Inquiries</span>
-                   <a href="tel:9687637511" className="font-semibold hover:text-blue-400 transition-colors">9687637511</a>
-                 </div>
-                 <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
-                   <span className="text-gray-300">Email</span>
-                   <a href="mailto:kblights29@gmail.com" className="font-semibold hover:text-blue-400 transition-colors">kblights29@gmail.com</a>
-                 </div>
-               </div>
-             </div>
-           </div>
-
-           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-             <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
-             <form className="space-y-6">
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                 <div>
-                   <label className="block text-sm font-medium mb-2">Name *</label>
-                   <input
-                     type="text"
-                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                     placeholder="Your Name"
-                   />
-                 </div>
-                 <div>
-                   <label className="block text-sm font-medium mb-2">Phone *</label>
-                   <input
-                     type="tel"
-                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                     placeholder="Your Phone"
-                   />
-                 </div>
-               </div>
-               <div>
-                 <label className="block text-sm font-medium mb-2">Email</label>
-                 <input
-                   type="email"
-                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                   placeholder="your@email.com"
-                 />
-               </div>
-               <div>
-                 <label className="block text-sm font-medium mb-2">Product Interest</label>
-                 <select className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                   <option value="" className="bg-gray-800">Select Product Category</option>
-                   <option value="switches" className="bg-gray-800">Smart Switches</option>
-                   <option value="locks" className="bg-gray-800">Smart Locks</option>
-                   <option value="sensors" className="bg-gray-800">Sensors & Automation</option>
-                   <option value="bulk" className="bg-gray-800">Bulk/Dealership Inquiry</option>
-                 </select>
-               </div>
-               <div>
-                 <label className="block text-sm font-medium mb-2">Message</label>
-                 <textarea
-                   rows="4"
-                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                   placeholder="Tell us about your requirements..."
-                 ></textarea>
-               </div>
-               <button
-                 type="submit"
-                 className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center justify-center space-x-2"
-               >
-                 <Mail className="w-4 h-4" />
-                 <span>Send Message</span>
-               </button>
-             </form>
-           </div>
-         </div>
-
-         {/* Dealer Network CTA */}
-         <div className="mt-16 bg-white/10 backdrop-blur-md rounded-2xl p-8 text-center border border-white/20">
-           <h3 className="text-2xl font-bold mb-4">Become a KB Switches Dealer</h3>
-           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-             Join our growing network of dealers across India. Attractive margins, marketing support, and exclusive territories available.
-           </p>
-           <button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 inline-flex items-center space-x-2">
-             <Users className="w-5 h-5" />
-             <span>Partner With Us</span>
-           </button>
-         </div>
-       </div>
-     </section >
-
-  {/* Footer */ }
-  < footer className = "bg-gray-900 text-white py-12 border-t border-gray-800" >
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <div className="flex items-center space-x-3 mb-4">
-            <div className="relative">
-              <Lightbulb className="w-8 h-8 text-blue-400" />
-              <Sparkles className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
-            </div>
+      {/* Footer */}
+      < footer className="bg-gray-900 text-white py-12 border-t border-gray-800" >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <span className="text-xl font-bold">KB Switches™</span>
-              <div className="text-xs text-blue-400">SMART HOME AUTOMATION</div>
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="relative">
+                  <Lightbulb className="w-8 h-8 text-blue-400" />
+                  <Sparkles className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1" />
+                </div>
+                <div>
+                  <span className="text-xl font-bold">KB Switches™</span>
+                  <div className="text-xs text-blue-400">SMART HOME AUTOMATION</div>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm">A Light With New Shine..</p>
+              <p className="text-gray-400 text-sm mt-2">Making Indian homes smarter since 2019</p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><a href="#products" className="hover:text-blue-400 transition-colors">Products</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors">Download Catalog</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors">Installation Guide</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors">Warranty</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><a href="#" className="hover:text-blue-400 transition-colors">Customer Care</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors">Dealer Locator</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors">Service Centers</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors">FAQs</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Certifications</h4>
+              <div className="grid grid-cols-2 gap-2">
+                {certifications.map((cert, index) => (
+                  <div key={index} className="flex items-center space-x-1 text-sm text-gray-400">
+                    <div className="text-blue-400">{cert.icon}</div>
+                    <span>{cert.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <p className="text-gray-400 text-sm">A Light With New Shine..</p>
-          <p className="text-gray-400 text-sm mt-2">Making Indian homes smarter since 2019</p>
-        </div>
 
-        <div>
-          <h4 className="font-semibold mb-4">Quick Links</h4>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li><a href="#products" className="hover:text-blue-400 transition-colors">Products</a></li>
-            <li><a href="#" className="hover:text-blue-400 transition-colors">Download Catalog</a></li>
-            <li><a href="#" className="hover:text-blue-400 transition-colors">Installation Guide</a></li>
-            <li><a href="#" className="hover:text-blue-400 transition-colors">Warranty</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-semibold mb-4">Support</h4>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li><a href="#" className="hover:text-blue-400 transition-colors">Customer Care</a></li>
-            <li><a href="#" className="hover:text-blue-400 transition-colors">Dealer Locator</a></li>
-            <li><a href="#" className="hover:text-blue-400 transition-colors">Service Centers</a></li>
-            <li><a href="#" className="hover:text-blue-400 transition-colors">FAQs</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-semibold mb-4">Certifications</h4>
-          <div className="grid grid-cols-2 gap-2">
-            {certifications.map((cert, index) => (
-              <div key={index} className="flex items-center space-x-1 text-sm text-gray-400">
-                <div className="text-blue-400">{cert.icon}</div>
-                <span>{cert.name}</span>
-              </div>
-            ))}
+          <div className="pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+            <p>&copy; 2024 B.R. ENTERPRISE. All rights reserved. | KB Switches is a registered trademark.</p>
           </div>
         </div>
-      </div>
+      </footer >
 
-      <div className="pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-        <p>&copy; 2024 B.R. ENTERPRISE. All rights reserved. | KB Switches is a registered trademark.</p>
-      </div>
-    </div>
-     </footer >
+      {/* Scroll to Top Button */}
+      {
+        showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40 electric-glow"
+          >
+            <ArrowUp className="w-6 h-6" />
+          </button>
+        )
+      }
 
-  {/* Scroll to Top Button */ }
-{
-  showScrollTop && (
-    <button
-      onClick={scrollToTop}
-      className="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40 electric-glow"
-    >
-      <ArrowUp className="w-6 h-6" />
-    </button>
-  )
-}
-
-{/* WhatsApp Button */ }
-<a
+      {/* WhatsApp Button */}
+      <a
         href="https://wa.me/917990414919"
         target="_blank"
         rel="noopener noreferrer"
@@ -935,7 +1123,7 @@ const App = () => {
       >
         <Phone className="w-6 h-6" />
       </a>
-    </div>
+    </div >
   );
 };
 
