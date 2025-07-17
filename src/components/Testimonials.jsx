@@ -64,6 +64,7 @@ const Testimonials = React.memo(() => {
                 controls 
                 className="w-full h-auto rounded-lg"
                 poster="/images/hero.png"
+                preload="none"
               >
                 <source src="/videos/dealer_review.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
