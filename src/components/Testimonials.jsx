@@ -64,14 +64,31 @@ const Testimonials = React.memo(() => {
                 controls 
                 className="w-full h-auto rounded-lg"
                 poster="/images/hero.png"
-                preload="none"
+                preload="metadata"
+                controlsList="download"
+                crossOrigin="anonymous"
               >
                 <source src="/videos/dealer_review.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
+                <p className="text-center text-gray-600 p-4">
+                  Your browser does not support the video tag. 
+                  <a href="/videos/dealer_review.mp4" className="text-blue-600 hover:underline ml-1" download>
+                    Download video instead
+                  </a>
+                </p>
               </video>
               <div className="mt-4 text-center">
                 <h4 className="font-semibold text-gray-900">Dealer Experience Review</h4>
                 <p className="text-sm text-gray-600">Our authorized dealer shares their experience with KB Switches</p>
+                <div className="mt-2">
+                  <a 
+                    href="/videos/dealer_review.mp4" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-700 text-sm underline"
+                  >
+                    Open video in new tab
+                  </a>
+                </div>
               </div>
             </div>
           </div>
