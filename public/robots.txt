@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Important pages for crawling
+Allow: /images/
+Allow: /catalogs/
+Allow: /videos/
+
+# Block unnecessary files
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: *.js.map
+Disallow: *.css.map
+
+# Sitemap location
+Sitemap: https://kbswitches.in/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
