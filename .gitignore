@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Large files (handled by Git LFS)
+# Note: These patterns are tracked by Git LFS
+# Temporary large files during development
+*.tmp.mp4
+*.tmp.pdf
+*.cache
