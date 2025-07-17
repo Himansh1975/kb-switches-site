@@ -28,7 +28,7 @@ const Footer = ({ showScrollTop, scrollToTop }) => {
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><a href="#products" className="hover:text-blue-400 transition-colors">Products</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">Download Catalog</a></li>
+                <li><a href="/catalogs/Catlog - PDF.pdf" download="KB-Switches-Catalog.pdf" className="hover:text-blue-400 transition-colors">Download Catalog</a></li>
                 <li><a href="#" className="hover:text-blue-400 transition-colors">Installation Guide</a></li>
                 <li><a href="#" className="hover:text-blue-400 transition-colors">Warranty</a></li>
               </ul>

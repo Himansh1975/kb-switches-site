@@ -18,6 +18,7 @@ export const productCategories = [
         applications: ["LED lights", "Ceiling lights", "charging cable", "T.V", "Computers"],
         benefits: ["Individual control", "Energy saving", "Voice compatible", "Schedule timers"],
         icon: "Zap",
+        image: "4_switch.png",
         colorClass: "blue",
         type: "switch",
         bestFor: "Living rooms, bedrooms"
@@ -33,6 +34,7 @@ export const productCategories = [
         applications: ["A.C (up to 2 Ton)", "Refrigerator", "Microwave", "Oven", "Iron", "Flour mill"],
         benefits: ["High capacity", "Surge protection", "Remote control", "Energy monitoring"],
         icon: "Power",
+        image: "15A_switch.png",
         colorClass: "purple",
         type: "switch",
         bestFor: "Kitchen, utility room"

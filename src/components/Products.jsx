@@ -27,10 +27,20 @@ const Products = ({ activeCategory, setActiveCategory, expandedProduct, setExpan
           return (
             <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 group border border-gray-100">
               {/* Product Header */}
-              <div className={`h-40 ${colors.bg} flex items-center justify-center relative overflow-hidden`}>
+              <div className={`h-64 ${colors.bg} flex items-center justify-center relative overflow-hidden`}>
                 <div className="absolute inset-0 circuit-pattern opacity-10"></div>
-                <div className={`${colors.icon} transform group-hover:scale-110 transition-transform duration-300`}>
-                  {renderIcon(product.icon, "w-16 h-16")}
+                <div className="transform group-hover:scale-110 transition-transform duration-300">
+                  {product.image ? (
+                    <img 
+                      src={`/images/${product.image}`}
+                      alt={product.name}
+                      className="w-full h-full object-contain p-4"
+                    />
+                  ) : (
+                    <div className={colors.icon}>
+                      {renderIcon(product.icon, "w-16 h-16")}
+                    </div>
+                  )}
                 </div>
                 <div className="absolute top-4 right-4">
                   <span className={`bg-white ${colors.text} text-sm font-bold px-3 py-1 rounded-full shadow-sm`}>

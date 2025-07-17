@@ -51,6 +51,31 @@ const Testimonials = React.memo(() => {
           ))}
         </div>
 
+        {/* Video Testimonials */}
+        <div className="mt-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Video Reviews</h3>
+            <p className="text-gray-600">See what our dealers and customers have to say</p>
+          </div>
+          
+          <div className="flex justify-center">
+            <div className="bg-white rounded-2xl p-6 shadow-lg max-w-2xl w-full">
+              <video 
+                controls 
+                className="w-full h-auto rounded-lg"
+                poster="/images/hero.png"
+              >
+                <source src="/videos/dealer_review.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div className="mt-4 text-center">
+                <h4 className="font-semibold text-gray-900">Dealer Experience Review</h4>
+                <p className="text-sm text-gray-600">Our authorized dealer shares their experience with KB Switches</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center mt-12">
           <div className="bg-white rounded-xl p-6 shadow-lg inline-block">
             <div className="flex items-center justify-center space-x-6 text-center">

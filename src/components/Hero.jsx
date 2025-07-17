@@ -52,10 +52,14 @@ const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
                 <Phone className="w-5 h-5" />
                 <span>Get Free Quote</span>
               </button>
-              <button className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-2">
+              <a 
+                href="/catalogs/Catlog - PDF.pdf" 
+                download="KB-Switches-Catalog.pdf"
+                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-2"
+              >
                 <CircuitBoard className="w-5 h-5" />
-                <span>View Catalog</span>
-              </button>
+                <span>Download Catalog</span>
+              </a>
             </div>
 
             {/* Trust Badges */}
@@ -74,9 +78,17 @@ const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
             <div className="bg-white rounded-2xl shadow-2xl p-8 electric-glow max-w-sm w-full">
               <div className="aspect-square bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 diagonal-lines opacity-10"></div>
-                <div className={getColorClasses(products[activeProduct].colorClass).icon}>
-                  {renderIcon(products[activeProduct].icon, "w-20 h-20")}
-                </div>
+                {products[activeProduct].image ? (
+                  <img 
+                    src={`/images/${products[activeProduct].image}`}
+                    alt={products[activeProduct].name}
+                    className="w-full h-full object-contain p-6"
+                  />
+                ) : (
+                  <div className={getColorClasses(products[activeProduct].colorClass).icon}>
+                    {renderIcon(products[activeProduct].icon, "w-20 h-20")}
+                  </div>
+                )}
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">{products[activeProduct].name}</h3>
               <p className="text-gray-600 mb-4">{products[activeProduct].shortDesc}</p>

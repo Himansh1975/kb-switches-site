@@ -8,7 +8,11 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-3">
             <div className="relative">
-              <CircuitBoard className="w-8 h-8 text-blue-600" />
+              <img 
+                src="/images/Logo.png" 
+                alt="KB Switches Logo" 
+                className="w-10 h-10 object-contain"
+              />
               <div className="absolute inset-0 bg-blue-600/20 rounded-lg blur-md"></div>
             </div>
             <div>
@@ -30,11 +34,11 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
           {/* Contact Info */}
           <div className="hidden lg:flex items-center space-x-4">
             <div className="text-right">
-              <p className="text-sm font-semibold text-gray-900">+91 98765 43210</p>
+              <p className="text-sm font-semibold text-gray-900">+91 79904 14919</p>
               <p className="text-xs text-blue-600">24/7 Support</p>
             </div>
             <a 
-              href="tel:+919876543210"
+              href="tel:+917990414919"
               className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
             >
               Call Now
@@ -65,9 +69,9 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
               <a href="#projects" className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium">Projects</a>
               <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium">Contact</a>
               <div className="px-3 py-2 border-t border-gray-200">
-                <p className="text-sm font-semibold text-gray-900">+91 98765 43210</p>
+                <p className="text-sm font-semibold text-gray-900">+91 79904 14919</p>
                 <a 
-                  href="tel:+919876543210"
+                  href="tel:+917990414919"
                   className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
                 >
                   Call Now

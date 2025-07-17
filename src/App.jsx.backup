@@ -1062,8 +1062,9 @@ const App = () => {
                <div className="space-y-4">
                  <div>
                    <p className="text-gray-700 mb-2 leading-relaxed">
-                     A-183 Ambica Industrial-2, Near Olive Circle,<br />
-                     Gandhi Kutir Road, Bhattar, Surat - 395017
+                     KB Switches and Home Automation<br />
+                     104 Dwarkesh Industrial Society, Opp Patidar Plywood,<br />
+                     Near Navjivan Circle, Bhattar, Surat - 395017
                    </p>
                  </div>
                  <div className="pt-4 border-t border-gray-200">

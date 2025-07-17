@@ -26,8 +26,9 @@ const Contact = React.memo(() => {
               <div className="space-y-4">
                 <div>
                   <p className="text-gray-700 mb-2 leading-relaxed">
-                    A-183 Ambica Industrial-2, Near Olive Circle,<br />
-                    Gandhi Kutir Road, Bhattar, Surat - 395017
+                    KB Switches and Home Automation<br />
+                    104 Dwarkesh Industrial Society, Opp Patidar Plywood,<br />
+                    Near Navjivan Circle, Bhattar, Surat - 395017
                   </p>
                 </div>
                 <div className="pt-4 border-t border-gray-200">
@@ -53,8 +54,12 @@ const Contact = React.memo(() => {
                   <a href="tel:9687637511" className="font-bold text-green-600 hover:text-green-700 transition-colors">9687637511</a>
                 </div>
                 <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg border border-purple-100">
-                  <span className="text-gray-700 font-medium">Email</span>
+                  <span className="text-gray-700 font-medium">General Email</span>
                   <a href="mailto:kblights29@gmail.com" className="font-bold text-purple-600 hover:text-purple-700 transition-colors break-all">kblights29@gmail.com</a>
+                </div>
+                <div className="flex items-center justify-between p-4 bg-orange-50 rounded-lg border border-orange-100">
+                  <span className="text-gray-700 font-medium">Support Email</span>
+                  <a href="mailto:support@kbswitches.in" className="font-bold text-orange-600 hover:text-orange-700 transition-colors break-all">support@kbswitches.in</a>
                 </div>
               </div>
             </div>
