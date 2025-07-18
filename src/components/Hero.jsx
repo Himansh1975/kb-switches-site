@@ -83,6 +83,7 @@ const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
                     src={`/images/${products[activeProduct].image}`}
                     alt={products[activeProduct].name}
                     className="w-full h-full object-contain p-6"
+                    loading="lazy"
                   />
                 ) : (
                   <div className={getColorClasses(products[activeProduct].colorClass).icon}>

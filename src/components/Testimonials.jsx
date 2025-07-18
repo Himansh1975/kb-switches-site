@@ -64,7 +64,7 @@ const Testimonials = React.memo(() => {
                 controls 
                 className="w-full h-auto rounded-lg"
                 poster="/images/hero.png"
-                preload="metadata"
+                preload="none"
                 controlsList="download"
                 crossOrigin="anonymous"
               >

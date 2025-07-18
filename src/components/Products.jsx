@@ -35,6 +35,7 @@ const Products = ({ activeCategory, setActiveCategory, expandedProduct, setExpan
                       src={`/images/${product.image}`}
                       alt={product.name}
                       className="w-full h-full object-contain p-4"
+                      loading="lazy"
                     />
                   ) : (
                     <div className={colors.icon}>
