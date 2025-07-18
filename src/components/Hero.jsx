@@ -3,6 +3,7 @@ import { Phone, CircuitBoard, Cpu } from 'lucide-react';
 import { certifications } from '../data/certifications';
 import { productCategories } from '../data/productCategories';
 import { renderIcon } from '../utils/iconRenderer';
+import { trackBusinessEvent } from '../utils/analytics';
 
 const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
   const products = useMemo(() => productCategories[0].products, []);
@@ -48,7 +49,10 @@ const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg electric-glow flex items-center justify-center space-x-2">
+              <button 
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg electric-glow flex items-center justify-center space-x-2"
+                onClick={() => trackBusinessEvent.quoteRequest()}
+              >
                 <Phone className="w-5 h-5" />
                 <span>Get Free Quote</span>
               </button>
@@ -56,6 +60,7 @@ const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
                 href="/catalogs/Catlog - PDF.pdf" 
                 download="KB-Switches-Catalog.pdf"
                 className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-2"
+                onClick={() => trackBusinessEvent.catalogDownload()}
               >
                 <CircuitBoard className="w-5 h-5" />
                 <span>Download Catalog</span>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, X, CircuitBoard } from 'lucide-react';
+import { trackBusinessEvent } from '../utils/analytics';
 
 const Header = ({ isMenuOpen, setIsMenuOpen }) => {
   return (
@@ -43,6 +44,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
             <a 
               href="tel:+917990414919"
               className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              onClick={() => trackBusinessEvent.phoneCall()}
             >
               Call Now
             </a>
@@ -76,6 +78,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
                 <a 
                   href="tel:+917990414919"
                   className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                  onClick={() => trackBusinessEvent.phoneCall()}
                 >
                   Call Now
                 </a>

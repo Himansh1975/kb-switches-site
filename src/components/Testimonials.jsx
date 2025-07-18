@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThumbsUp, Star, Quote } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
+import { trackBusinessEvent } from '../utils/analytics';
 
 const Testimonials = React.memo(() => {
   return (
@@ -67,6 +68,7 @@ const Testimonials = React.memo(() => {
                 preload="none"
                 controlsList="download"
                 crossOrigin="anonymous"
+                onPlay={() => trackBusinessEvent.videoPlay('dealer_review')}
               >
                 <source src="/videos/dealer_review.mp4" type="video/mp4" />
                 <p className="text-center text-gray-600 p-4">
