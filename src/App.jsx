@@ -9,7 +9,9 @@ import {
   Projects,
   Contact,
   Footer,
-  GlobalStyles
+  GlobalStyles,
+  ErrorBoundary,
+  ComponentErrorBoundary
 } from './components';
 
 const App = () => {
@@ -39,41 +41,61 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <GlobalStyles />
-      
-      <Header 
-        isMenuOpen={isMenuOpen} 
-        setIsMenuOpen={setIsMenuOpen} 
-      />
-      
-      <Hero 
-        activeProduct={activeProduct} 
-        setActiveProduct={setActiveProduct} 
-      />
-      
-      <Stats />
-      
-      <Features />
-      
-      <Products 
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-        expandedProduct={expandedProduct}
-        setExpandedProduct={setExpandedProduct}
-      />
-      
-      <Testimonials />
-      
-      <Projects />
-      
-      <Contact />
-      
-      <Footer 
-        showScrollTop={showScrollTop} 
-        scrollToTop={scrollToTop} 
-      />
-    </div>
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gray-50">
+        <GlobalStyles />
+        
+        <ComponentErrorBoundary componentName="Header">
+          <Header 
+            isMenuOpen={isMenuOpen} 
+            setIsMenuOpen={setIsMenuOpen} 
+          />
+        </ComponentErrorBoundary>
+        
+        <ComponentErrorBoundary componentName="Hero Section">
+          <Hero 
+            activeProduct={activeProduct} 
+            setActiveProduct={setActiveProduct} 
+          />
+        </ComponentErrorBoundary>
+        
+        <ComponentErrorBoundary componentName="Stats Section">
+          <Stats />
+        </ComponentErrorBoundary>
+        
+        <ComponentErrorBoundary componentName="Features Section">
+          <Features />
+        </ComponentErrorBoundary>
+        
+        <ComponentErrorBoundary componentName="Products Section">
+          <Products 
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+            expandedProduct={expandedProduct}
+            setExpandedProduct={setExpandedProduct}
+          />
+        </ComponentErrorBoundary>
+        
+        <ComponentErrorBoundary componentName="Testimonials Section">
+          <Testimonials />
+        </ComponentErrorBoundary>
+        
+        <ComponentErrorBoundary componentName="Projects Section">
+          <Projects />
+        </ComponentErrorBoundary>
+        
+        <ComponentErrorBoundary componentName="Contact Section">
+          <Contact />
+        </ComponentErrorBoundary>
+        
+        <ComponentErrorBoundary componentName="Footer">
+          <Footer 
+            showScrollTop={showScrollTop} 
+            scrollToTop={scrollToTop} 
+          />
+        </ComponentErrorBoundary>
+      </div>
+    </ErrorBoundary>
   );
 };
 

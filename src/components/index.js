@@ -8,3 +8,5 @@ export { default as Projects } from './Projects';
 export { default as Contact } from './Contact';
 export { default as Footer } from './Footer';
 export { default as GlobalStyles } from './GlobalStyles';
+export { default as ErrorBoundary } from './ErrorBoundary';
+export { default as ComponentErrorBoundary } from './ComponentErrorBoundary';
