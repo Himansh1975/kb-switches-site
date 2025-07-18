@@ -12,7 +12,7 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
               <img 
                 src="/images/Logo.svg" 
                 alt="KB Switches Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-12 h-12 object-contain"
                 onError={(e) => {
                   e.target.src = "/images/Logo.png";
                 }}
