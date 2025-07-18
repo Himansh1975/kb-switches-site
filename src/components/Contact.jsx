@@ -1,7 +1,72 @@
-import React from 'react';
-import { Phone, MapPin, Mail, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, MapPin, Mail, Users, CheckCircle, Loader } from 'lucide-react';
+import { useForm } from '../utils/useForm';
+import { contactFormRules } from '../utils/formValidation';
+import { trackBusinessEvent } from '../utils/analytics';
+import FormInput from './FormInput';
+import FormSelect from './FormSelect';
+import FormTextarea from './FormTextarea';
 
 const Contact = React.memo(() => {
+  const [submitStatus, setSubmitStatus] = useState('idle'); // idle, success, error
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const initialValues = {
+    name: '',
+    phone: '',
+    email: '',
+    productInterest: '',
+    message: ''
+  };
+
+  const {
+    values,
+    errors,
+    isSubmitting,
+    handleSubmit,
+    resetForm,
+    getFieldProps
+  } = useForm(initialValues, contactFormRules);
+
+  const productOptions = [
+    { value: 'switches', label: 'Smart Switches' },
+    { value: 'lights', label: 'Smart Lighting' },
+    { value: 'automation', label: 'Home Automation' },
+    { value: 'bulk', label: 'Bulk/Dealership Inquiry' }
+  ];
+
+  const handleFormSubmit = async (formData) => {
+    setSubmitStatus('idle');
+    
+    try {
+      // Simulate API call - replace with actual form submission
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Track form submission
+      trackBusinessEvent.contactFormSubmit(formData);
+      
+      setSubmitStatus('success');
+      setSubmitMessage('Thank you for your message! We\'ll get back to you within 24 hours.');
+      resetForm();
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setSubmitMessage('');
+      }, 5000);
+      
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitMessage('Sorry, there was an error sending your message. Please try again or contact us directly.');
+      console.error('Form submission error:', error);
+    }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    handleSubmit(handleFormSubmit);
+  };
+
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
       <div className="absolute inset-0 circuit-pattern opacity-5"></div>
@@ -68,58 +133,93 @@ const Contact = React.memo(() => {
           {/* Contact Form */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Name *</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="Your Name"
-                  />
+            
+            {/* Success/Error Messages */}
+            {submitStatus === 'success' && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <p className="text-green-800 font-medium">Message Sent Successfully!</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="Your Phone"
-                  />
-                </div>
+                <p className="text-green-700 mt-2 text-sm">{submitMessage}</p>
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="your@email.com"
+            )}
+            
+            {submitStatus === 'error' && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div className="flex items-center space-x-2">
+                  <Mail className="w-5 h-5 text-red-600" />
+                  <p className="text-red-800 font-medium">Message Failed to Send</p>
+                </div>
+                <p className="text-red-700 mt-2 text-sm">{submitMessage}</p>
+              </div>
+            )}
+
+            <form onSubmit={onSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormInput
+                  label="Full Name"
+                  placeholder="Your full name"
+                  required
+                  {...getFieldProps('name')}
+                />
+                <FormInput
+                  label="Phone Number"
+                  type="tel"
+                  placeholder="10-digit phone number"
+                  required
+                  {...getFieldProps('phone')}
                 />
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Product Interest</label>
-                <select className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                  <option value="">Select Product Category</option>
-                  <option value="switches">Smart Switches</option>
-                  <option value="lights">Smart Lighting</option>
-                  <option value="automation">Home Automation</option>
-                  <option value="bulk">Bulk/Dealership Inquiry</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                <textarea
-                  rows="4"
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  placeholder="Tell us about your requirements..."
-                ></textarea>
-              </div>
+              
+              <FormInput
+                label="Email Address"
+                type="email"
+                placeholder="your@email.com (optional)"
+                {...getFieldProps('email')}
+              />
+              
+              <FormSelect
+                label="Product Interest"
+                placeholder="Select product category"
+                options={productOptions}
+                {...getFieldProps('productInterest')}
+              />
+              
+              <FormTextarea
+                label="Message"
+                placeholder="Tell us about your requirements, project details, or questions..."
+                required
+                rows={4}
+                maxLength={1000}
+                {...getFieldProps('message')}
+              />
+              
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
+                disabled={isSubmitting}
+                className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg ${
+                  isSubmitting 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white'
+                }`}
               >
-                <Mail className="w-5 h-5" />
-                <span>Send Message</span>
+                {isSubmitting ? (
+                  <>
+                    <Loader className="w-5 h-5 animate-spin" />
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <Mail className="w-5 h-5" />
+                    <span>Send Message</span>
+                  </>
+                )}
               </button>
+              
+              <p className="text-sm text-gray-500 text-center">
+                We'll respond to your inquiry within 24 hours
+              </p>
             </form>
           </div>
         </div>
