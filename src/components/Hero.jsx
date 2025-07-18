@@ -4,9 +4,13 @@ import { certifications } from '../data/certifications';
 import { productCategories } from '../data/productCategories';
 import { renderIcon } from '../utils/iconRenderer';
 import { trackBusinessEvent } from '../utils/analytics';
+import { useLoadingState } from '../utils/useLoadingState';
+import { SkeletonHero } from './SkeletonLoader';
+import LazyImage from './LazyImage';
 
 const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
   const products = useMemo(() => productCategories[0].products, []);
+  const [isLoading] = useLoadingState(true, 800);
 
   const getColorClasses = (colorClass) => {
     const colors = {
@@ -20,6 +24,10 @@ const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
     };
     return colors[colorClass] || colors.blue;
   };
+
+  if (isLoading) {
+    return <SkeletonHero />;
+  }
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -84,11 +92,11 @@ const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
               <div className="aspect-square bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl mb-6 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 diagonal-lines opacity-10"></div>
                 {products[activeProduct].image ? (
-                  <img 
+                  <LazyImage 
                     src={`/images/${products[activeProduct].image}`}
                     alt={products[activeProduct].name}
                     className="w-full h-full object-contain p-6"
-                    loading="lazy"
+                    aspectRatio="aspect-square"
                   />
                 ) : (
                   <div className={getColorClasses(products[activeProduct].colorClass).icon}>

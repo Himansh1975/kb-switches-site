@@ -2,8 +2,13 @@ import React from 'react';
 import { Zap, CheckCircle, ChevronRight } from 'lucide-react';
 import { productCategories } from '../data/productCategories';
 import { renderIcon } from '../utils/iconRenderer';
+import { useLoadingState } from '../utils/useLoadingState';
+import { SkeletonProducts } from './SkeletonLoader';
+import LazyImage from './LazyImage';
 
 const Products = ({ activeCategory, setActiveCategory, expandedProduct, setExpandedProduct }) => {
+  const [isLoading] = useLoadingState(true, 1200);
+  
   const getColorClasses = (colorClass) => {
     const colors = {
       blue: { bg: 'bg-blue-50', icon: 'text-blue-600', text: 'text-blue-600' },
@@ -31,11 +36,11 @@ const Products = ({ activeCategory, setActiveCategory, expandedProduct, setExpan
                 <div className="absolute inset-0 circuit-pattern opacity-10"></div>
                 <div className="transform group-hover:scale-110 transition-transform duration-300">
                   {product.image ? (
-                    <img 
+                    <LazyImage 
                       src={`/images/${product.image}`}
                       alt={product.name}
                       className="w-full h-full object-contain p-4"
-                      loading="lazy"
+                      aspectRatio="h-full"
                     />
                   ) : (
                     <div className={colors.icon}>
@@ -202,6 +207,10 @@ const Products = ({ activeCategory, setActiveCategory, expandedProduct, setExpan
       </div>
     );
   };
+
+  if (isLoading) {
+    return <SkeletonProducts />;
+  }
 
   return (
     <section id="products" className="py-20 bg-white">

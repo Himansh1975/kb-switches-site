@@ -10,3 +10,5 @@ export { default as Footer } from './Footer';
 export { default as GlobalStyles } from './GlobalStyles';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as ComponentErrorBoundary } from './ComponentErrorBoundary';
+export { default as LazyImage } from './LazyImage';
+export * from './SkeletonLoader';

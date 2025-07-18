@@ -2,8 +2,30 @@ import React from 'react';
 import { ThumbsUp, Star, Quote } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
 import { trackBusinessEvent } from '../utils/analytics';
+import { useLoadingState } from '../utils/useLoadingState';
+import { SkeletonTestimonial } from './SkeletonLoader';
 
 const Testimonials = React.memo(() => {
+  const [isLoading] = useLoadingState(true, 1000);
+
+  if (isLoading) {
+    return (
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4 animate-pulse" />
+            <div className="h-4 bg-gray-200 rounded w-96 mx-auto animate-pulse" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <SkeletonTestimonial key={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="testimonials" className="py-20 bg-gray-50 relative overflow-hidden">
       <div className="absolute inset-0 circuit-pattern opacity-5"></div>

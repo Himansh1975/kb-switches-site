@@ -1,7 +1,11 @@
 import React from 'react';
 import { Timer, Activity, MapPin, Award } from 'lucide-react';
+import { useLoadingState } from '../utils/useLoadingState';
+import { SkeletonStats } from './SkeletonLoader';
 
 const Stats = React.memo(() => {
+  const [isLoading] = useLoadingState(true, 600);
+  
   const stats = [
     {
       icon: <Timer className="w-8 h-8 text-blue-600 mx-auto mb-3" />,
@@ -24,6 +28,10 @@ const Stats = React.memo(() => {
       label: "Certified"
     }
   ];
+
+  if (isLoading) {
+    return <SkeletonStats />;
+  }
 
   return (
     <section className="py-16 bg-white relative">
