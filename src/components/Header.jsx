@@ -9,9 +9,12 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
           <div className="flex items-center space-x-3">
             <div className="relative">
               <img 
-                src="/images/Logo.png" 
+                src="/images/Logo.svg" 
                 alt="KB Switches Logo" 
                 className="w-10 h-10 object-contain"
+                onError={(e) => {
+                  e.target.src = "/images/Logo.png";
+                }}
               />
               <div className="absolute inset-0 bg-blue-600/20 rounded-lg blur-md"></div>
             </div>
