@@ -48,12 +48,12 @@ const Hero = React.memo(({ activeProduct, setActiveProduct }) => {
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-800 mb-6 leading-tight">
-              SWITCH TO
-              <span className="text-blue-600 block">SMART LIVING</span>
+              <span className="text-blue-600 block">KB SWITCHES</span>
+              SMART LIVING
             </h1>
 
             <p className="text-lg md:text-xl text-gray-600 mb-8">
-              A Light With New Shine.. Transform your home with India's most reliable WiFi smart switches and automation solutions.
+              A Light With New Shine.. KB Switches brings you India's most reliable WiFi smart switches and home automation solutions.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
