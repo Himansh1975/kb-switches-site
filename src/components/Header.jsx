@@ -8,17 +8,14 @@ const Header = ({ isMenuOpen, setIsMenuOpen }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-3">
-            <div className="relative">
-              <img 
-                src="/images/Logo.svg" 
-                alt="KB Switches Logo" 
-                className="w-12 h-12 object-contain"
-                onError={(e) => {
-                  e.target.src = "/images/Logo.png";
-                }}
-              />
-              <div className="absolute inset-0 bg-blue-600/20 rounded-lg blur-md"></div>
-            </div>
+            <img 
+              src="/images/Logo.svg" 
+              alt="KB Switches Logo" 
+              className="w-14 h-14 object-contain filter brightness-50 contrast-200 saturate-200"
+              onError={(e) => {
+                e.target.src = "/images/Logo.png";
+              }}
+            />
             <div>
               <h1 className="text-xl font-bold text-gray-900">KB Switches</h1>
               <p className="text-xs text-blue-600 font-medium">Smart Home Solutions</p>
