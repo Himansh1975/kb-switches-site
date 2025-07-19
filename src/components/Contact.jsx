@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MapPin, Mail, Users, CheckCircle, Loader } from 'lucide-react';
+import { Phone, MapPin, Mail, Users, CheckCircle, MessageCircle } from 'lucide-react';
 import { useForm } from '../utils/useForm';
 import { contactFormRules } from '../utils/formValidation';
 import { trackBusinessEvent } from '../utils/analytics';
@@ -35,30 +35,66 @@ const Contact = React.memo(() => {
     { value: 'bulk', label: 'Bulk/Dealership Inquiry' }
   ];
 
+  const formatWhatsAppMessage = (formData) => {
+    const productLabels = {
+      'switches': 'Smart Switches',
+      'lights': 'Smart Lighting',
+      'automation': 'Home Automation',
+      'bulk': 'Bulk/Dealership Inquiry'
+    };
+
+    let message = `🏠 *KB Switches Inquiry*\n\n`;
+    message += `👤 *Name:* ${formData.name}\n`;
+    message += `📞 *Phone:* ${formData.phone}\n`;
+    
+    if (formData.email) {
+      message += `📧 *Email:* ${formData.email}\n`;
+    }
+    
+    if (formData.productInterest) {
+      message += `🔌 *Interest:* ${productLabels[formData.productInterest] || formData.productInterest}\n`;
+    }
+    
+    message += `\n💬 *Message:*\n${formData.message}\n\n`;
+    message += `---\n_Sent from kbswitches.in contact form_`;
+    
+    return message;
+  };
+
   const handleFormSubmit = async (formData) => {
     setSubmitStatus('idle');
     
     try {
-      // Simulate API call - replace with actual form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
       // Track form submission
       trackBusinessEvent.contactFormSubmit(formData);
       
+      // Format WhatsApp message
+      const whatsappMessage = formatWhatsAppMessage(formData);
+      const phoneNumber = '917990414919'; // +91 79904 14919
+      
+      // Create WhatsApp URL
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+      
+      // Brief delay to show "Opening WhatsApp..." state
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Open WhatsApp
+      window.open(whatsappUrl, '_blank');
+      
       setSubmitStatus('success');
-      setSubmitMessage('Thank you for your message! We\'ll get back to you within 24 hours.');
+      setSubmitMessage('WhatsApp opened with your message! Please send it to complete your inquiry.');
       resetForm();
       
-      // Reset success message after 5 seconds
+      // Reset success message after 8 seconds
       setTimeout(() => {
         setSubmitStatus('idle');
         setSubmitMessage('');
-      }, 5000);
+      }, 8000);
       
     } catch (error) {
       setSubmitStatus('error');
-      setSubmitMessage('Sorry, there was an error sending your message. Please try again or contact us directly.');
-      console.error('Form submission error:', error);
+      setSubmitMessage('Sorry, there was an error. Please try contacting us directly via WhatsApp or phone.');
+      console.error('WhatsApp redirect error:', error);
     }
   };
 
@@ -201,24 +237,24 @@ const Contact = React.memo(() => {
                 className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg ${
                   isSubmitting 
                     ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white'
+                    : 'bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white'
                 }`}
               >
                 {isSubmitting ? (
                   <>
-                    <Loader className="w-5 h-5 animate-spin" />
-                    <span>Sending...</span>
+                    <MessageCircle className="w-5 h-5 animate-spin" />
+                    <span>Opening WhatsApp...</span>
                   </>
                 ) : (
                   <>
-                    <Mail className="w-5 h-5" />
-                    <span>Send Message</span>
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Send via WhatsApp</span>
                   </>
                 )}
               </button>
               
               <p className="text-sm text-gray-500 text-center">
-                We'll respond to your inquiry within 24 hours
+                Your message will open in WhatsApp - just click send to reach us instantly!
               </p>
             </form>
           </div>
