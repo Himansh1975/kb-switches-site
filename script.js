@@ -33,3 +33,19 @@ document.querySelector('#enquiry').addEventListener('submit',event=>{event.preve
 document.querySelector('#name').addEventListener('input',event=>event.target.setCustomValidity(''));
 document.querySelectorAll('video').forEach(video=>video.addEventListener('play',()=>document.querySelectorAll('video').forEach(other=>{if(other!==video)other.pause()})));
 document.querySelector('#year').textContent=new Date().getFullYear();
+
+const moodLabels={relax:'Time to unwind',evening:'Evening glow',bright:'A warm welcome'};
+document.querySelectorAll('.mood-controls button').forEach(button=>button.addEventListener('click',()=>{
+ const mood=button.dataset.mood;document.querySelector('.product-hero').dataset.mood=mood;
+ document.querySelectorAll('.mood-controls button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+ document.querySelector('#mood-status').textContent=moodLabels[mood];
+}));
+const filmDurations={'video-dealer-review':'0:47','video-company-film':'0:40','video-ahmedabad-1':'1:12','video-ahmedabad-2':'1:27'};
+document.querySelectorAll('.film-play').forEach(button=>{
+ const video=document.getElementById(button.dataset.video);const player=button.closest('.film-player');const error=player.parentElement.querySelector('.film-error');
+ button.hidden=false;video.controls=false;
+ player.querySelector('.film-duration').textContent=filmDurations[video.id];
+ button.addEventListener('click',async()=>{button.hidden=true;video.controls=true;error.hidden=true;try{await video.play();video.focus()}catch{error.hidden=false;video.controls=true;player.classList.add('playing')}});
+ video.addEventListener('play',()=>{button.hidden=true;video.controls=true;player.classList.add('playing')});
+ video.addEventListener('ended',()=>{button.hidden=false;video.controls=false;player.classList.remove('playing')});
+});
